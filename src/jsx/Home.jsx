@@ -1,5 +1,6 @@
 import React from 'react'
 import { getLibros } from './Api'
+import LogoImg from '../components/LogoImg';
 
 
 
@@ -22,12 +23,15 @@ export default class Home extends React.Component {
 
     render() {
         return (
+        <>
+            <LogoImg />
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Name:
               <input type="text" value={this.state.value} onChange={this.handleChange} />        </label>
                 <input type="submit" value="Submit" />
             </form>
+        </>
         );
     }
 }
