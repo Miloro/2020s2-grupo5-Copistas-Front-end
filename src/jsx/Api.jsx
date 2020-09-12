@@ -3,9 +3,13 @@ const axios = require('axios');
 axios.defaults.baseURL = 'http://localhost:8080/api';
 
 async function getLibros(titulo) {
-    axios.get('/libro?titulo=' + titulo).then(result => {
-        console.log(result)
-    }).catch(console.log)
+    const { data: libros } = await axios.get('/libro?titulo=' + titulo);
+    return libros;
 }
 
-export { getLibros }
+async function getHojaDeRuta(idLibro) {
+    const { data: hojaDeRuta } = await axios.get('/hojaderuta/libro/' + idLibro);
+    return hojaDeRuta;
+}
+
+export { getLibros, getHojaDeRuta }

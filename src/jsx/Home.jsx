@@ -1,59 +1,56 @@
 import React from 'react'
 import { getLibros } from './Api'
+import Libro from './libro'
 import LogoImg from '../components/LogoImg';
-import DataModal from './DataModal';
-
 
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            value: '',
-            show: true,
-            showData: false,
+        this.state = {
+            tituloABuscar: '',
+            libros: []
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.showModal = this.showModal.bind(this);
+        this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
+        this.buscarLibros = this.buscarLibros.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+    componentDidMount() {
+
     }
 
-    handleSubmit(event) {
-        console.log(getLibros(this.state.value));
-        this.showModal()
-        //aqui deberia abrir el modal en vez de console log en pantalla
+    cambiarTituloABuscar(event) {
+        this.setState({ tituloABuscar: event.target.value });
+    }
+
+    buscarLibros(event) {
         event.preventDefault();
+        this.guardarLibros(this.state.tituloABuscar);
     }
 
-    closeModal(){
-        this.setState({
-          show: false,
-        });
+    guardarLibros(titulo) {
+        getLibros(titulo).then(libros => {
+            this.setState({ libros })
+        })
     }
 
-    showModal(){
-        this.setState({
-          show: true,
-        });
-      }
 
     render() {
         return (
-        <>
-            <LogoImg />
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
-              <input type="text" value={this.state.value} onChange={this.handleChange} />        </label>
-                <input type="submit" value="Submit" />
-                <DataModal message={this.state.value} show={this.state.show} closeModal={this.closeModal} />
-            </form>
-        </>
+            <>
+                <LogoImg />
+                <form onSubmit={this.buscarLibros}>
+                    <label>
+                        Titulo:
+                    <input type="text" value={this.state.tituloABuscar} onChange={this.cambiarTituloABuscar} />        </label>
+                    <button >Buscar</button>
+
+                </form>
+
+                {       this.state.libros.map(libro => <Libro libro={libro} />)}
+            </>
         );
     }
+
+
 }
