@@ -12,4 +12,10 @@ async function getHojaDeRuta(idLibro) {
     return hojaDeRuta;
 }
 
-export { getLibros, getHojaDeRuta }
+async function crearCliente(cliente) {
+    const body = cliente;
+    const res = await axios.post('/cliente', body);
+    return res.data;
+}
+
+export { getLibros, getHojaDeRuta, crearCliente }

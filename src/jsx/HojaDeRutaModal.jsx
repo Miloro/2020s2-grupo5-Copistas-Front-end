@@ -24,7 +24,7 @@ export default function HojaDeRutaModal({ libro, abierto, cerrarModal }) {
   return (
     <Modal show={abierto}>
       <ModalBody>
-        Estado del libro : {!!hojaDeRuta ? <div>{
+        Historial de los estados del libro : {!!hojaDeRuta ? <div>{
           mostrarIteraciones()
         }</div> : "buscando..."}
       </ModalBody>
