@@ -4,6 +4,7 @@ import Libro from './libro'
 import LogoImg from '../components/LogoImg';
 import CardDeck from 'react-bootstrap/CardDeck'
 import CrearClienteModal from './crearClienteModel'
+import CrearLibroModal from './crearLibroModal'
 import Button from 'react-bootstrap/Button';
 
 
@@ -13,7 +14,8 @@ export default class Home extends React.Component {
         this.state = {
             tituloABuscar: '',
             abierto: false,
-            libros: []
+            libros: [],
+            show: false,
         };
         this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
         this.buscarLibros = this.buscarLibros.bind(this);
@@ -44,9 +46,20 @@ export default class Home extends React.Component {
         });
     }
 
+    cerrarLibroModal = () => {
+        this.setState({
+            show: false
+        });
+    }
+
     abrirModal = () => {
         this.setState({
             abierto: true
+        });
+    }
+    abrirLibroModal = () => {
+        this.setState({
+            show: true
         });
     }
 
@@ -55,6 +68,8 @@ export default class Home extends React.Component {
         return (
             <>
                 <LogoImg />
+                <Button onClick={this.abrirLibroModal} > Crear Libro </Button>
+                <CrearLibroModal show={this.state.show} cerrarLibroModal={this.cerrarLibroModal} />
                 <Button onClick={this.abrirModal} > Crear Cliente </Button>
                 <CrearClienteModal abierto={this.state.abierto} cerrarModal={this.cerrarModal} />
                 <form onSubmit={this.buscarLibros}>

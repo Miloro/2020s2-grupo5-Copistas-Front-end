@@ -18,4 +18,10 @@ async function crearCliente(cliente) {
     return res.data;
 }
 
-export { getLibros, getHojaDeRuta, crearCliente }
+async function crearLibro(libro) {
+    const body = libro;
+    const res = await axios.post('/libro', body);
+    return res.data;
+}
+
+export { getLibros, getHojaDeRuta, crearCliente, crearLibro }
