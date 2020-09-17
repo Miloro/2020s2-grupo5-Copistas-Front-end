@@ -4,9 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { crearLibro } from './Api'
 
 //export default function CrearLibroModal(props) {
-    export default function CrearLibroModal({ show, cerrarLibroModal }) {
+export default function CrearLibroModal({ show, cerrarLibroModal }) {
     const [libro, setLibro] = useState({
-        "id": 0,
         "titulo": "",
         "nombreAutor": "",
         "apellidoAutor": " ",
@@ -26,7 +25,7 @@ import { crearLibro } from './Api'
     const enviarDatos = (event) => {
         event.preventDefault()
         crearLibro(libro);
-        cerrarLibroModal();  
+        cerrarLibroModal();
     }
 
     return (
@@ -34,7 +33,6 @@ import { crearLibro } from './Api'
             <ModalBody>
                 <h1>Crear Libro</h1>
                 <form className="row" onSubmit={enviarDatos}>
-                    <input type="text" placeholder="id" className="form-control" onChange={handleInputChange} name="id"></input>
                     <input type="text" placeholder="titulo" className="form-control" onChange={handleInputChange} name="titulo"></input>
                     <input type="text" placeholder="nombreAutor" className="form-control" onChange={handleInputChange} name="nombreAutor"></input>
                     <input type="text" placeholder="apellidoAutor" className="form-control" onChange={handleInputChange} name="apellidoAutor"></input>
