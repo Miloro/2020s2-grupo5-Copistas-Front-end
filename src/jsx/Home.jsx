@@ -3,10 +3,9 @@ import { getLibros } from './Api'
 import Libro from './libro'
 import LogoImg from '../components/LogoImg';
 import CardDeck from 'react-bootstrap/CardDeck'
-import CrearClienteModal from './crearClienteModel'
+import CrearClienteModal from './crearClienteModal'
 import CrearLibroModal from './crearLibroModal'
 import Button from 'react-bootstrap/Button';
-
 
 export default class Home extends React.Component {
     constructor(props) {

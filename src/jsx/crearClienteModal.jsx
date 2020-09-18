@@ -3,7 +3,7 @@ import { Modal, ModalBody } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { crearCliente } from './Api'
 
-export default function CrearClienteModal({ abierto, cerrarModal }) {
+export default function CrearClienteModal({ abierto, cerrarModal, darId }) {
 
     const [cliente, setCliente] = useState({
         "nombre": "",
@@ -30,7 +30,9 @@ export default function CrearClienteModal({ abierto, cerrarModal }) {
 
     const enviarDatos = (event) => {
         event.preventDefault()
-        crearCliente(cliente);
+        crearCliente(cliente).then(clienteCreado => {
+            darId(clienteCreado)
+        });
         cerrarModal()
     }
 
