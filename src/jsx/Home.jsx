@@ -6,6 +6,9 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import CrearClienteModal from './crearClienteModal'
 import CrearLibroModal from './crearLibroModal'
 import Button from 'react-bootstrap/Button';
+import NavBar from './NavBar'
+import  { BrowserRouter, Switch, Route, NavLink, Link, Nav,  Redirect } from 'react-router-dom';
+
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -23,6 +26,7 @@ export default class Home extends React.Component {
     componentDidMount() {
 
     }
+
 
     cambiarTituloABuscar(event) {
         this.setState({ tituloABuscar: event.target.value });
@@ -66,11 +70,11 @@ export default class Home extends React.Component {
     render() {
         return (
             <>
+                <BrowserRouter>
+                <NavBar/> 
+            
+                </BrowserRouter>               
                 <LogoImg />
-                <Button onClick={this.abrirLibroModal} > Crear Libro </Button>
-                <CrearLibroModal show={this.state.show} cerrarLibroModal={this.cerrarLibroModal} />
-                <Button onClick={this.abrirModal} > Crear Cliente </Button>
-                <CrearClienteModal abierto={this.state.abierto} cerrarModal={this.cerrarModal} />
                 <form onSubmit={this.buscarLibros}>
                     <label>
                         Titulo:
@@ -85,6 +89,4 @@ export default class Home extends React.Component {
             </>
         );
     }
-
-
 }

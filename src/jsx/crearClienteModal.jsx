@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, ModalBody } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { crearCliente } from './Api'
+import Button from 'react-bootstrap/Button';
 
 export default function CrearClienteModal({ abierto, cerrarModal, darId }) {
 
@@ -57,6 +58,14 @@ export default function CrearClienteModal({ abierto, cerrarModal, darId }) {
                     <button type="submit" className="btn btn-primary">Enviar</button>
                 </form>
             </ModalBody>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={cerrarModal}>
+                    Cerrar
+                </Button>
+                <Button variant="primary" onClick={enviarDatos}>
+                    Guardar CLiente
+                </Button>
+            </Modal.Footer>
         </Modal>
     );
 }
