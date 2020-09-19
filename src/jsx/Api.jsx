@@ -24,4 +24,15 @@ async function crearLibro(libro) {
     return res.data;
 }
 
-export { getLibros, getHojaDeRuta, crearCliente, crearLibro }
+async function crearHojaDeRuta(destinatario, solicitante, libro) {
+    const body = {
+        "destinatario_id": destinatario,
+        "solicitante_id": solicitante,
+        "libro_id": libro
+    };
+    const res = await axios.post('/hojaderuta', body);
+    console.log(res.data)
+    return res.data;
+}
+
+export { getLibros, getHojaDeRuta, crearCliente, crearLibro, crearHojaDeRuta }

@@ -5,14 +5,19 @@ import Col from 'react-bootstrap/Col'
 import CrearClienteModal from './crearClienteModal'
 import Button from 'react-bootstrap/Button';
 import CrearLibroModal from './crearLibroModal'
-import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
+import DatosDelCliente from "./datosDelCliente";
+import DatosDelLibro from "./datosDelLibro";
+
+import { crearHojaDeRuta } from "./Api"
 
 export default function HojaDeRuta() {
 
     const [estadoModalSolicitante, setEstadoModalSolicitante] = useState(false)
     const [estadoModalDestinatario, setEstadoModalDestinatario] = useState(false)
     const [estadoModalLibro, setEstadoModalLibro] = useState(false)
+
     const [solicitante, setSolicitante] = useState({
         "nombre": "",
         "apellido": "",
@@ -28,7 +33,34 @@ export default function HojaDeRuta() {
         "sexo": "HOMBRE",
         "nivelDiscapacidadVisual": ""
     })
-    const [startDate, setStartDate] = useState(new Date());
+
+    const [destinatario, setDestinatario] = useState({
+        "nombre": "",
+        "apellido": "",
+        "dni": 0,
+        "cuilORcuit": 0,
+        "domicilio": "",
+        "ciudad": "",
+        "provincia": "",
+        "telefonoFijo": 0,
+        "telefonoMovil": 0,
+        "correoElectronico": "",
+        "fechaDeNacimiento": "2020-09-08",
+        "sexo": "HOMBRE",
+        "nivelDiscapacidadVisual": ""
+    })
+
+    const [libro, setLibro] = useState({
+        "titulo": "",
+        "nombreAutor": "",
+        "apellidoAutor": " ",
+        "editorial": "",
+        "edicion": "",
+        "idioma": "",
+        "categoria": ""
+    })
+
+
 
     const abrirModalSolicitante = () => {
         setEstadoModalSolicitante(true)
@@ -57,6 +89,13 @@ export default function HojaDeRuta() {
         setEstadoModalLibro(false)
     }
 
+    const aaa = () => {
+        console.log(solicitante.id)
+        console.log(destinatario.id)
+        console.log(libro.id)
+        crearHojaDeRuta(solicitante.id, destinatario.id, libro.id)
+    }
+
     return (
         <div>
             <Container>
@@ -64,58 +103,24 @@ export default function HojaDeRuta() {
                     <Col>
                         Solicitante
                         <Button onClick={abrirModalSolicitante} > + Solicitante </Button>
-                        <CrearClienteModal abierto={estadoModalSolicitante} cerrarModal={cerrarModalSolicitante} darId={setSolicitante} />
-                        <Row>
-                            <label>nombre: {solicitante.nombre}</label>
-                        </Row>
-                        <Row>
-                            <label>apellido: {solicitante.apellido}</label>
-                        </Row>
-                        <Row>
-                            <label>dni: {solicitante.dni}</label>
-                        </Row>
-                        <Row>
-                            <label>cuilORcuit: {solicitante.cuilORcuit}</label>
-                        </Row>
-                        <Row>
-                            <label>domicilio: {solicitante.domicilio}</label>
-                        </Row>
-                        <Row>
-                            <label>ciudad: {solicitante.ciudad}</label>
-                        </Row>
-                        <Row>
-                            <label>provincia: {solicitante.provincia}</label>
-                        </Row>
-                        <Row>
-                            <label>telefonoFijo: {solicitante.telefonoFijo}</label>
-                        </Row>
-                        <Row>
-                            <label>telefonoMovil: {solicitante.telefonoMovil}</label>
-                        </Row>
-                        <Row>
-                            <label>correoElectronico: {solicitante.correoElectronico}</label>
-                        </Row>
-                        <Row>
-                            <label>fechaDeNacimiento: {solicitante.fechaDeNacimiento}</label>
-                        </Row>
-                        <Row>
-                            <label>sexo: {solicitante.sexo}</label>
-                        </Row>
-                        <Row>
-                            <label>nivelDiscapacidadVisual: {solicitante.nivelDiscapacidadVisual}</label>
-                        </Row>
+                        <CrearClienteModal abierto={estadoModalSolicitante} cerrarModal={cerrarModalSolicitante} actualizarCliente={setSolicitante} />
+                        <DatosDelCliente cliente={solicitante} />
                     </Col>
                     <Col>
-                        Solicitante
-                        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                        Destinatario
                         <Button onClick={abrirModalDestinatario} > + Destinatario </Button>
-                        <CrearClienteModal abierto={estadoModalDestinatario} cerrarModal={abrirModalDestinatario} />
+                        <CrearClienteModal abierto={estadoModalDestinatario} cerrarModal={cerrarModalDestinatario} actualizarCliente={setDestinatario} />
+                        <DatosDelCliente cliente={destinatario} />
                     </Col>
                     <Col>
-                        Solicitante
+                        Libro
                         <Button onClick={abrirModalLibro} > + libro </Button>
-                        <CrearLibroModal show={estadoModalLibro} cerrarLibroModal={cerrarModalLibro} />
+                        <CrearLibroModal show={estadoModalLibro} cerrarLibroModal={cerrarModalLibro} actualizarLibro={setLibro} />
+                        <DatosDelLibro libro={libro} />
                     </Col>
+                </Row>
+                <Row>
+                    <Button onClick={aaa} > crear hoja de ruta </Button>
                 </Row>
             </Container>
         </div>
