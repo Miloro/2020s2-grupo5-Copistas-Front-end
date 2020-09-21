@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import Button from 'react-bootstrap/Button';
+import CrearLibroModal from './crearLibroModal'
+
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DatosDelLibro({ libro }) {
+export default function DatosDelLibro({ libroId }) {
+
+    const [estadoModalLibro, setEstadoModalLibro] = useState(false)
+    const [libro, setLibro] = useState({
+        "titulo": "",
+        "nombreAutor": "",
+        "apellidoAutor": " ",
+        "editorial": "",
+        "edicion": "",
+        "idioma": "",
+        "categoria": ""
+    })
+
+    const abrirModalLibro = () => {
+        setEstadoModalLibro(true)
+
+    }
+
+    const cerrarModalLibro = () => {
+        setEstadoModalLibro(false)
+    }
 
     return (
         <div>
             <Col>
+                Libro
+                <Button onClick={abrirModalLibro} > + </Button>
+                <CrearLibroModal show={estadoModalLibro} cerrarLibroModal={cerrarModalLibro} actualizarLibro={setLibro} libroId={libroId} />
                 <Row>
                     <label>Titulo: {libro.titulo}</label>
                 </Row>

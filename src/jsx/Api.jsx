@@ -31,7 +31,6 @@ async function crearHojaDeRuta(destinatario, solicitante, libro) {
         "libro_id": libro
     };
     const res = await axios.post('/hojaderuta', body);
-    console.log(res.data)
     return res.data;
 }
 

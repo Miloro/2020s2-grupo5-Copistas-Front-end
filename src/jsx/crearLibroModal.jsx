@@ -5,7 +5,7 @@ import { crearLibro } from './Api'
 import Button from 'react-bootstrap/Button';
 
 //export default function CrearLibroModal(props) {
-export default function CrearLibroModal({ show, cerrarLibroModal, actualizarLibro }) {
+export default function CrearLibroModal({ show, cerrarLibroModal, actualizarLibro, libroId }) {
     const [libro, setLibro] = useState({
         "titulo": "",
         "nombreAutor": "",
@@ -27,6 +27,7 @@ export default function CrearLibroModal({ show, cerrarLibroModal, actualizarLibr
         event.preventDefault()
         crearLibro(libro).then(libroCreado => {
             actualizarLibro(libroCreado)
+            libroId(libroCreado.id)
         });
         cerrarLibroModal();
     }
