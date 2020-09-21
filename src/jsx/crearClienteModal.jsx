@@ -5,14 +5,15 @@ import { crearCliente } from './Api'
 import Button from 'react-bootstrap/Button';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 registerLocale('es', es)
 
 
-export default function CrearClienteModal({ abierto, cerrarModal, actualizarCliente }) {
+export default function CrearClienteModal({ abierto, cerrarModal, actualizarCliente, clienteId }) {
 
     const [cliente, setCliente] = useState({
+        id: "",
         nombre: "",
         apellido: "",
         dni: 0,
@@ -28,6 +29,7 @@ export default function CrearClienteModal({ abierto, cerrarModal, actualizarClie
         nivelDiscapacidadVisual: ""
     })
 
+
     const handleInputChange = (event) => {
         setCliente({
             ...cliente,
@@ -39,6 +41,7 @@ export default function CrearClienteModal({ abierto, cerrarModal, actualizarClie
         event.preventDefault()
         crearCliente(cliente).then(clienteCreado => {
             actualizarCliente(clienteCreado)
+            clienteId(clienteCreado.id)
         });
         cerrarModal()
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import CrearClienteModal from './crearClienteModal'
+
 import Button from 'react-bootstrap/Button';
 import CrearLibroModal from './crearLibroModal'
 
@@ -10,45 +10,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatosDelCliente from "./datosDelCliente";
 import DatosDelLibro from "./datosDelLibro";
 
-import { crearHojaDeRuta } from "./Api"
+
 
 export default function HojaDeRuta() {
 
-    const [estadoModalSolicitante, setEstadoModalSolicitante] = useState(false)
-    const [estadoModalDestinatario, setEstadoModalDestinatario] = useState(false)
     const [estadoModalLibro, setEstadoModalLibro] = useState(false)
 
-    const [solicitante, setSolicitante] = useState({
-        "nombre": "",
-        "apellido": "",
-        "dni": 0,
-        "cuilORcuit": 0,
-        "domicilio": "",
-        "ciudad": "",
-        "provincia": "",
-        "telefonoFijo": 0,
-        "telefonoMovil": 0,
-        "correoElectronico": "",
-        "fechaDeNacimiento": "2020-09-08",
-        "sexo": "HOMBRE",
-        "nivelDiscapacidadVisual": ""
-    })
+    const [destinatario_id, setDestinatario_id] = useState(0)
+    const [solicitante_id, setSolicitante_id] = useState(0)
+    const [libro_id, setLibro_id] = useState(0)
 
-    const [destinatario, setDestinatario] = useState({
-        "nombre": "",
-        "apellido": "",
-        "dni": 0,
-        "cuilORcuit": 0,
-        "domicilio": "",
-        "ciudad": "",
-        "provincia": "",
-        "telefonoFijo": 0,
-        "telefonoMovil": 0,
-        "correoElectronico": "",
-        "fechaDeNacimiento": "2020-09-08",
-        "sexo": "HOMBRE",
-        "nivelDiscapacidadVisual": ""
-    })
 
     const [libro, setLibro] = useState({
         "titulo": "",
@@ -60,26 +31,6 @@ export default function HojaDeRuta() {
         "categoria": ""
     })
 
-
-
-    const abrirModalSolicitante = () => {
-        setEstadoModalSolicitante(true)
-
-    }
-
-    const cerrarModalSolicitante = () => {
-        setEstadoModalSolicitante(false)
-    }
-
-    const abrirModalDestinatario = () => {
-        setEstadoModalDestinatario(true)
-
-    }
-
-    const cerrarModalDestinatario = () => {
-        setEstadoModalDestinatario(false)
-    }
-
     const abrirModalLibro = () => {
         setEstadoModalLibro(true)
 
@@ -89,11 +40,10 @@ export default function HojaDeRuta() {
         setEstadoModalLibro(false)
     }
 
+
     const aaa = () => {
-        console.log(solicitante.id)
-        console.log(destinatario.id)
-        console.log(libro.id)
-        crearHojaDeRuta(solicitante.id, destinatario.id, libro.id)
+        console.log(destinatario_id)
+        console.log(solicitante_id)
     }
 
     return (
@@ -101,16 +51,10 @@ export default function HojaDeRuta() {
             <Container>
                 <Row>
                     <Col>
-                        Solicitante
-                        <Button onClick={abrirModalSolicitante} > + Solicitante </Button>
-                        <CrearClienteModal abierto={estadoModalSolicitante} cerrarModal={cerrarModalSolicitante} actualizarCliente={setSolicitante} />
-                        <DatosDelCliente cliente={solicitante} />
+                        <DatosDelCliente titulo={"Solicitante"} clienteId={setDestinatario_id} />
                     </Col>
                     <Col>
-                        Destinatario
-                        <Button onClick={abrirModalDestinatario} > + Destinatario </Button>
-                        <CrearClienteModal abierto={estadoModalDestinatario} cerrarModal={cerrarModalDestinatario} actualizarCliente={setDestinatario} />
-                        <DatosDelCliente cliente={destinatario} />
+                        <DatosDelCliente titulo={"Destinatario"} clienteId={setSolicitante_id} />
                     </Col>
                     <Col>
                         Libro
