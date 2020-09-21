@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
+
 registerLocale('es', es)
 
 
@@ -29,6 +30,13 @@ export default function CrearClienteModal({ abierto, cerrarModal, actualizarClie
         nivelDiscapacidadVisual: ""
     })
 
+    const cambiarOpcionSexo = (event) => {
+
+        setCliente({
+            ...cliente,
+            sexo: event.target.value
+        })
+    }
 
     const handleInputChange = (event) => {
         setCliente({
@@ -42,6 +50,7 @@ export default function CrearClienteModal({ abierto, cerrarModal, actualizarClie
         crearCliente(cliente).then(clienteCreado => {
             actualizarCliente(clienteCreado)
             clienteId(clienteCreado.id)
+            console.log(clienteCreado)
         });
         cerrarModal()
     }
@@ -61,39 +70,65 @@ export default function CrearClienteModal({ abierto, cerrarModal, actualizarClie
                 <Modal.Title>Crear Cliente</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form className="row" >
-                    <label>Nombre</label>
-                    <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
-                    <label>Apellido</label>
-                    <input type="text" placeholder="Apellido" className="form-control" onChange={handleInputChange} name="apellido"></input>
-                    <label>DNI</label>
-                    <input type="int" placeholder="DNI" className="form-control" onChange={handleInputChange} name="dni"></input>
-                    <label>CUIL o RCUIT</label>
-                    <input type="int" placeholder="CUIL o RCUIT" className="form-control" onChange={handleInputChange} name="cuilORcuit"></input>
-                    <label>Domicilio</label>
-                    <input type="int" placeholder="Domicilio" className="form-control" onChange={handleInputChange} name="domicilio"></input>
-                    <label>Ciudad</label>
-                    <input type="int" placeholder="Ciudad" className="form-control" onChange={handleInputChange} name="ciudad"></input>
-                    <label>Provincia</label>
-                    <input type="int" placeholder="Provincia" className="form-control" onChange={handleInputChange} name="provincia"></input>
-                    <label>Telefono fijo</label>
-                    <input type="int" placeholder="Telefono fijo" className="form-control" onChange={handleInputChange} name="telefonoFijo"></input>
-                    <label>Telefono movil</label>
-                    <input type="int" placeholder="Telefono movil" className="form-control" onChange={handleInputChange} name="telefonoMovil"></input>
-                    <label>Correo electronico</label>
-                    <input type="int" placeholder="Correo electronico" className="form-control" onChange={handleInputChange} name="correoElectronico"></input>
-                    <label>Fecha de nacimiento</label>
-                    <DatePicker
-                        selected={cliente.fechaDeNacimiento}
-                        onChange={handleChange}
-                        locale="es"
-                        dateFormat="dd/MM/yyyy"
-
-                    />
-                    <label>Sexo</label>
-                    <input type="int" placeholder="Sexo" className="form-control" onChange={handleInputChange} name="sexo"></input>
-                    <label>Nivel discapacidad visual</label>
-                    <input type="int" placeholder="Nivel discapacidad visual" className="form-control" onChange={handleInputChange} name="nivelDiscapacidadVisual"></input>
+                <form  >
+                    <div >
+                        <label>Nombre</label>
+                        <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
+                    </div >
+                    <div >
+                        <label>Apellido</label>
+                        <input type="text" placeholder="Apellido" className="form-control" onChange={handleInputChange} name="apellido"></input>
+                    </div>
+                    <div>
+                        <label>DNI</label>
+                        <input type="int" placeholder="DNI" className="form-control" onChange={handleInputChange} name="dni"></input>
+                    </div>
+                    <div>
+                        <label>CUIL o RCUIT</label>
+                        <input type="int" placeholder="CUIL o RCUIT" className="form-control" onChange={handleInputChange} name="cuilORcuit"></input>
+                    </div>
+                    <div>
+                        <label>Domicilio</label>
+                        <input type="int" placeholder="Domicilio" className="form-control" onChange={handleInputChange} name="domicilio"></input>
+                    </div>
+                    <div>
+                        <label>Ciudad</label>
+                        <input type="int" placeholder="Ciudad" className="form-control" onChange={handleInputChange} name="ciudad"></input>
+                    </div>
+                    <div>
+                        <label>Provincia</label>
+                        <input type="int" placeholder="Provincia" className="form-control" onChange={handleInputChange} name="provincia"></input>
+                    </div>
+                    <div>
+                        <label>Telefono fijo</label>
+                        <input type="int" placeholder="Telefono fijo" className="form-control" onChange={handleInputChange} name="telefonoFijo"></input>
+                    </div>
+                    <div>
+                        <label>Telefono movil</label>
+                        <input type="int" placeholder="Telefono movil" className="form-control" onChange={handleInputChange} name="telefonoMovil"></input>
+                    </div>
+                    <div>
+                        <label >Correo electronico</label>
+                        <input type="int" placeholder="Correo electronico" className="form-control" onChange={handleInputChange} name="correoElectronico"></input>
+                    </div>
+                    <div>
+                        <label >Fecha de nacimiento </label> <br />
+                        <DatePicker
+                            selected={cliente.fechaDeNacimiento}
+                            onChange={handleChange}
+                            locale="es"
+                            dateFormat="dd/MM/yyyy"
+                        />
+                    </div>
+                    <div onChange={cambiarOpcionSexo}>
+                        <label >Sexo</label> <br />
+                        <input type="radio" value="HOMBRE" name="gender" /> Hombre
+                        <input type="radio" value="MUJER" name="gender" /> Mujer
+                    </div>
+                    <div>
+                        <label>Nivel discapacidad visual</label>
+                        <input type="int" placeholder="Nivel discapacidad visual" className="form-control" onChange={handleInputChange} name="nivelDiscapacidadVisual"></input>
+                    </div>
                 </form>
             </Modal.Body>
             <Modal.Footer>
