@@ -3,12 +3,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import CrearClienteModal from './crearClienteModal'
+import { getClientePorDNI } from './Api'
 
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function DatosDelCliente({ titulo, clienteId }) {
 
-
+    const [dniABuscar, setDniABuscar] = useState('')
     const [estadoModalCliente, setEstadoModalCliente] = useState(false)
     const [cliente, setCliente] = useState({
         id: "",
@@ -36,12 +37,36 @@ export default function DatosDelCliente({ titulo, clienteId }) {
         setEstadoModalCliente(false)
     }
 
+    const cambiarDniABuscar = (event) => {
+        if (!Number(event.target.value) && event.target.value !== "") {
+            return
+        }
+        setDniABuscar(event.target.value)
+    }
+
+    const buscarClientePorDni = () => {
+        getClientePorDNI(dniABuscar).then(clienteEncontrado => {
+            !!clienteEncontrado[0] ? setearCliente(clienteEncontrado[0]) : setCliente(cliente)
+
+        }
+        )
+    }
+
+    const setearCliente = (cliente) => {
+        setCliente(cliente)
+        clienteId(cliente.id)
+    }
+
     return (
         <div>
             <Col>
                 {titulo}
                 <Button onClick={abrirModalCliente} > + </Button>
                 <CrearClienteModal abierto={estadoModalCliente} cerrarModal={cerrarModalCliente} actualizarCliente={setCliente} clienteId={clienteId} />
+                <Row>
+                    <Col><input class="form-control" value={dniABuscar} onChange={cambiarDniABuscar} /></Col>
+                    <Col><Button onClick={buscarClientePorDni} > Buscar por DNI</Button></Col>
+                </Row>
                 <Row>
                     <label>nombre: {cliente.nombre}</label>
                 </Row>

@@ -34,4 +34,9 @@ async function crearHojaDeRuta(destinatario, solicitante, libro) {
     return res.data;
 }
 
-export { getLibros, getHojaDeRuta, crearCliente, crearLibro, crearHojaDeRuta }
+async function getClientePorDNI(dni) {
+    const { data: clientes } = await axios.get('/cliente?dni=' + dni);
+    return clientes;
+}
+
+export { getLibros, getHojaDeRuta, crearCliente, crearLibro, crearHojaDeRuta, getClientePorDNI }
