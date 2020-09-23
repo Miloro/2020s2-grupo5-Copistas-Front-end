@@ -13,12 +13,9 @@ export default class LogoImg extends React.Component {
   
     render() {
       return(
-          <Container>
-              <Row>
-                  <img src={logo} className="logo" />
-                  <h1 className="header"> "CENTRO DE COPISTAS" </h1>                
-              </Row>
-          </Container>
+          
+                  <img src={logo} class="img-rounded" alt="Cinque Terre" className="logo" />                
+            
       );
       }
   }

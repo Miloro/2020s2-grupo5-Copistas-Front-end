@@ -3,6 +3,7 @@ import  { BrowserRouter, Switch, Route, NavLink, Link, Nav,  Redirect } from 're
 import Button from 'react-bootstrap/Button';
 import CrearLibroModal from './crearLibroModal'
 import CrearClienteModal from './crearClienteModal'
+import LogoImg from '../components/LogoImg';
 
 
 export default class NavBar extends React.Component{
@@ -40,10 +41,11 @@ export default class NavBar extends React.Component{
     render(){
         return(
             <nav className="nav">
-            <Button onClick={this.abrirLibroModal} > Crear Libro </Button>
+            <LogoImg class="img-rounded" alt="Cinque Terre" className="logo"/>
+            {/*<Button onClick={this.abrirLibroModal} > Crear Libro </Button>
             <CrearLibroModal show={this.state.show} cerrarLibroModal={this.cerrarLibroModal} />
             <Button onClick={this.abrirModal} > Crear Cliente </Button>
-            <CrearClienteModal abierto={this.state.abierto} cerrarModal={this.cerrarModal} />
+        <CrearClienteModal abierto={this.state.abierto} cerrarModal={this.cerrarModal} />*/}
             <Link className="nav-link" to="/page">page</Link>
         </nav>
       );

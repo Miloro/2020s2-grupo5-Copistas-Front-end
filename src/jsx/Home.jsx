@@ -74,7 +74,7 @@ export default class Home extends React.Component {
                 <NavBar/> 
             
                 </BrowserRouter>               
-                <LogoImg />
+               
                 <form onSubmit={this.buscarLibros}>
                     <label>
                         Titulo:
