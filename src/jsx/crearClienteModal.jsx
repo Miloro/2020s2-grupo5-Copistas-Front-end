@@ -71,106 +71,52 @@ export default function CrearClienteModal({
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div>
-            <label>Nombre</label>
-            <input
-              type="text"
-              placeholder="Nombre"
-              className="form-control"
-              onChange={handleInputChange}
-              name="nombre"
-            ></input>
-          </div>
-          <div>
-            <label>Apellido</label>
-            <input
-              type="text"
-              placeholder="Apellido"
-              className="form-control"
-              onChange={handleInputChange}
-              name="apellido"
-            ></input>
-          </div>
-          <div>
-            <label>DNI</label>
-            <input
-              type="int"
-              placeholder="DNI"
-              className="form-control"
-              onChange={handleInputChange}
-              name="dni"
-            ></input>
-          </div>
-          <div>
-            <label>CUIL o RCUIT</label>
-            <input
-              type="int"
-              placeholder="CUIL o RCUIT"
-              className="form-control"
-              onChange={handleInputChange}
-              name="cuilORcuit"
-            ></input>
-          </div>
-          <div>
-            <label>Domicilio</label>
-            <input
-              type="int"
-              placeholder="Domicilio"
-              className="form-control"
-              onChange={handleInputChange}
-              name="domicilio"
-            ></input>
-          </div>
-          <div>
-            <label>Ciudad</label>
-            <input
-              type="int"
-              placeholder="Ciudad"
-              className="form-control"
-              onChange={handleInputChange}
-              name="ciudad"
-            ></input>
-          </div>
-          <div>
-            <label>Provincia</label>
-            <input
-              type="int"
-              placeholder="Provincia"
-              className="form-control"
-              onChange={handleInputChange}
-              name="provincia"
-            ></input>
-          </div>
-          <div>
-            <label>Telefono fijo</label>
-            <input
-              type="int"
-              placeholder="Telefono fijo"
-              className="form-control"
-              onChange={handleInputChange}
-              name="telefonoFijo"
-            ></input>
-          </div>
-          <div>
-            <label>Telefono movil</label>
-            <input
-              type="int"
-              placeholder="Telefono movil"
-              className="form-control"
-              onChange={handleInputChange}
-              name="telefonoMovil"
-            ></input>
-          </div>
-          <div>
-            <label>Correo electronico</label>
-            <input
-              type="int"
-              placeholder="Correo electronico"
-              className="form-control"
-              onChange={handleInputChange}
-              name="correoElectronico"
-            ></input>
-          </div>
+          <InputForm
+            label="Nombre"
+            name="nombre"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Apellido"
+            name="apellido"
+            onChange={handleInputChange}
+          />
+          <InputForm label="DNI" name="dni" onChange={handleInputChange} />
+          <InputForm
+            label="CUIL o CUIT"
+            name="cuilORcuit"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Domicilio"
+            name="domicilio"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Ciudad"
+            name="ciudad"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Provincia"
+            name="provincia"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Telefono fijo"
+            name="telefonoFijo"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Telefono movil"
+            name="telefonoMovil"
+            onChange={handleInputChange}
+          />
+          <InputForm
+            label="Correo electronico"
+            name="correoElectronico"
+            onChange={handleInputChange}
+          />
           <div>
             <label>Fecha de nacimiento </label> <br />
             <DatePicker
@@ -188,7 +134,6 @@ export default function CrearClienteModal({
           <div>
             <label>Nivel discapacidad visual</label>
             <input
-              type="int"
               placeholder="Nivel discapacidad visual"
               className="form-control"
               onChange={handleInputChange}
@@ -206,5 +151,15 @@ export default function CrearClienteModal({
         </Button>
       </Modal.Footer>
     </Modal>
+  );
+}
+
+function InputForm({ label, ...props }) {
+  //name onchange
+  return (
+    <div>
+      <label>{label}</label>
+      <input {...props} placeholder={label} className="form-control"></input>
+    </div>
   );
 }

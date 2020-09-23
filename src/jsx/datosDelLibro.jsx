@@ -1,62 +1,61 @@
-import React, { useState } from 'react';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import React, { useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import CrearLibroModal from './crearLibroModal'
+import Button from "react-bootstrap/Button";
+import CrearLibroModal from "./crearLibroModal";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function DatosDelLibro({ libroId }) {
+  const [estadoModalLibro, setEstadoModalLibro] = useState(false);
+  const [libro, setLibro] = useState({
+    titulo: "",
+    nombreAutor: "",
+    apellidoAutor: " ",
+    editorial: "",
+    edicion: "",
+    idioma: "",
+    categoria: "",
+  });
 
-    const [estadoModalLibro, setEstadoModalLibro] = useState(false)
-    const [libro, setLibro] = useState({
-        "titulo": "",
-        "nombreAutor": "",
-        "apellidoAutor": " ",
-        "editorial": "",
-        "edicion": "",
-        "idioma": "",
-        "categoria": ""
-    })
+  const abrirModalLibro = () => {
+    setEstadoModalLibro(true);
+  };
 
-    const abrirModalLibro = () => {
-        setEstadoModalLibro(true)
+  const cerrarModalLibro = () => {
+    setEstadoModalLibro(false);
+  };
 
-    }
-
-    const cerrarModalLibro = () => {
-        setEstadoModalLibro(false)
-    }
-
-    return (
-        <div>
-            <Col>
-                Libro
-                <Button onClick={abrirModalLibro} > + </Button>
-                <CrearLibroModal show={estadoModalLibro} cerrarLibroModal={cerrarModalLibro} actualizarLibro={setLibro} libroId={libroId} />
-                <Row>
-                    <label>Titulo: {libro.titulo}</label>
-                </Row>
-                <Row>
-                    <label>Nombre del autor: {libro.nombreAutor}</label>
-                </Row>
-                <Row>
-                    <label>Apellido del autor: {libro.apellidoAutor}</label>
-                </Row>
-                <Row>
-                    <label>Editorial: {libro.editorial}</label>
-                </Row>
-                <Row>
-                    <label>Edicion: {libro.edicion}</label>
-                </Row>
-                <Row>
-                    <label>Idioma: {libro.idioma}</label>
-                </Row>
-                <Row>
-                    <label>Categoria: {libro.categoria}</label>
-                </Row>
-            </Col>
-        </div>
-    );
+  return (
+    <div>
+      Libro
+      <Button onClick={abrirModalLibro}> + </Button>
+      <CrearLibroModal
+        show={estadoModalLibro}
+        cerrarLibroModal={cerrarModalLibro}
+        actualizarLibro={setLibro}
+        libroId={libroId}
+      />
+      <div>
+        <label>Título: {libro.titulo}</label>
+      </div>
+      <div>
+        <label>Nombre del autor: {libro.nombreAutor}</label>
+      </div>
+      <div>
+        <label>Apellido del autor: {libro.apellidoAutor}</label>
+      </div>
+      <div>
+        <label>Editorial: {libro.editorial}</label>
+      </div>
+      <div>
+        <label>Edición: {libro.edicion}</label>
+      </div>
+      <div>
+        <label>Idioma: {libro.idioma}</label>
+      </div>
+      <div>
+        <label>Categoría: {libro.categoria}</label>
+      </div>
+    </div>
+  );
 }
