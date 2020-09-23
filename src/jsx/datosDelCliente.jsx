@@ -7,7 +7,7 @@ import { getClientePorDNI } from "./Api";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DatosDelCliente({ titulo, clienteId }) {
+export default function DatosDelCliente({ titulo, setClienteId }) {
   const [dniABuscar, setDniABuscar] = useState("");
 
   const [estadoModalCliente, setEstadoModalCliente] = useState(false);
@@ -54,7 +54,7 @@ export default function DatosDelCliente({ titulo, clienteId }) {
 
   const setearCliente = (cliente) => {
     setCliente(cliente);
-    clienteId(cliente.id);
+    setClienteId(cliente.id);
   };
 
   return (
@@ -66,7 +66,7 @@ export default function DatosDelCliente({ titulo, clienteId }) {
           abierto={estadoModalCliente}
           cerrarModal={cerrarModalCliente}
           actualizarCliente={setCliente}
-          clienteId={clienteId}
+          setClienteId={setClienteId}
         />
         <Row>
           <Col>
