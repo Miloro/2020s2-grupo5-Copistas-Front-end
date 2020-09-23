@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import CrearClienteModal from "./crearClienteModal";
 import { getClientePorDNI } from "./Api";
@@ -24,7 +22,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
     telefonoFijo: 0,
     telefonoMovil: 0,
     correoElectronico: "",
-    fechaDeNacimiento: "2020/09/08",
+    fechaDeNacimiento: "",
     sexo: "HOMBRE",
     nivelDiscapacidadVisual: "",
   });
@@ -59,7 +57,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
 
   return (
     <div>
-      <Col>
+      <div>
         {titulo}
         <Button onClick={abrirModalCliente}> + </Button>
         <CrearClienteModal
@@ -68,60 +66,56 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
           actualizarCliente={setCliente}
           setClienteId={setClienteId}
         />
-        <Row>
-          <Col>
-            <input
-              class="form-control"
-              value={dniABuscar}
-              onChange={cambiarDniABuscar}
-            />
-          </Col>
-          <Col>
-            <Button onClick={buscarClientePorDni}> Buscar por DNI</Button>
-          </Col>
-        </Row>
-        <Row>
+        <div>
+          <input
+            class="form-control"
+            value={dniABuscar}
+            onChange={cambiarDniABuscar}
+          />
+          <Button onClick={buscarClientePorDni}> Buscar por DNI</Button>
+        </div>
+        <div>
           <label>Nombre: {cliente.nombre}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Apellido: {cliente.apellido}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>DNI: {cliente.dni}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>CUIL/CUIT: {cliente.cuilORcuit}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Domicilio: {cliente.domicilio}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Ciudad: {cliente.ciudad}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Provincia: {cliente.provincia}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Teléfono Fijo: {cliente.telefonoFijo}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Teléfono Movil: {cliente.telefonoMovil}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>eMail: {cliente.correoElectronico}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Fecha de nacimiento: {cliente.fechaDeNacimiento}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>Sexo: {cliente.sexo}</label>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <label>
             Nivel discapacidad visual: {cliente.nivelDiscapacidadVisual}
           </label>
-        </Row>
-      </Col>
+        </div>
+      </div>
     </div>
   );
 }
