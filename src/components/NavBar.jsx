@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import LogoImg from "../components/LogoImg";
+import LogoImg from "./LogoImg";
 
 export default class NavBar extends React.Component {
   constructor(props) {

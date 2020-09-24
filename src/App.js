@@ -1,7 +1,7 @@
 import React from "react";
 //import { Route, BrowserRouter as Router } from 'react-router-dom'
-import Home from "./jsx/Home";
-import HojaDeRuta from "./jsx/HojaDeRuta";
+import Home from "./components/Home";
+import HojaDeRuta from "./components/HojaDeRuta";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 

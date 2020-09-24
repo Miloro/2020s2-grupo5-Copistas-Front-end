@@ -63,10 +63,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <BrowserRouter>
-          <NavBar />
-        </BrowserRouter>
-
         <form onSubmit={this.buscarLibros}>
           <label>
             Titulo:
