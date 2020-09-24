@@ -1,20 +1,17 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { getLibros } from "./Api";
 import Libro from "./libro";
 
 import CardDeck from "react-bootstrap/CardDeck";
 
 import NavBar from "./NavBar";
-import { BrowserRouter } from "react-router-dom";
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tituloABuscar: "",
-      abierto: false,
       libros: [],
-      show: false,
     };
     this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
     this.buscarLibros = this.buscarLibros.bind(this);
@@ -37,23 +34,6 @@ export default class Home extends React.Component {
     });
   }
 
-  cerrarModal = () => {
-    this.setState({
-      abierto: false,
-    });
-  };
-
-  cerrarLibroModal = () => {
-    this.setState({
-      show: false,
-    });
-  };
-
-  abrirModal = () => {
-    this.setState({
-      abierto: true,
-    });
-  };
   abrirLibroModal = () => {
     this.setState({
       show: true,
@@ -62,25 +42,24 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <>
-        <form onSubmit={this.buscarLibros}>
+      <Fragment>
+        <NavBar propiedades = {this.state } ></NavBar>
+        <form className="form-inline my-2 my-lg-0" onSubmit={this.buscarLibros}>
           <label>
-            Titulo:
             <input
-              type="text"
+                className="form-control mr-sm-2" placeholder="Buscar Libro Por titulo"
               value={this.state.tituloABuscar}
               onChange={this.cambiarTituloABuscar}
-            />{" "}
+            />
           </label>
-
-          <button>Buscar</button>
+          <button className="btn btn-outline-success my-2 my-sm-0">Buscar</button>
         </form>
         <CardDeck>
-          {this.state.libros.map((libro) => (
+          {this.state.libros.map((libro,key) => (
             <Libro libro={libro} />
           ))}
         </CardDeck>
-      </>
+      </Fragment>
     );
   }
 }

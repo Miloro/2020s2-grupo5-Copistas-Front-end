@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {Fragment, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,6 +10,7 @@ import DatosDelCliente from "./datosDelCliente";
 import DatosDelLibro from "./datosDelLibro";
 
 import { crearHojaDeRuta } from "./Api";
+import NavBar from "./NavBar";
 
 export default function HojaDeRuta() {
   const [destinatario_id, setDestinatario_id] = useState();
@@ -24,7 +25,8 @@ export default function HojaDeRuta() {
   };
 
   return (
-    <div>
+    <Fragment>
+      <NavBar></NavBar>
       <Container>
         <Row>
           <Col>
@@ -47,6 +49,6 @@ export default function HojaDeRuta() {
           <Button onClick={enviarHojaDeRuta}> crear hoja de ruta </Button>
         </Row>
       </Container>
-    </div>
+    </Fragment>
   );
 }
