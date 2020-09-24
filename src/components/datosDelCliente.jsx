@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, {Fragment, useState} from "react";
 import Button from "react-bootstrap/Button";
 import CrearClienteModal from "./crearClienteModal";
 import { getClientePorDNI } from "./Api";
+import "../css/hojaDeRuta.css"
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -56,23 +57,25 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
   };
 
   return (
-    <div>
-      <div>
-        {titulo}
-        <Button onClick={abrirModalCliente}> + </Button>
+      <Fragment>
+        <div class = "tituloConBoton">
+          <h4>{titulo}</h4>
+          <button type="button" className="btn btn-primary btn-circle flex" onClick={abrirModalCliente}>+</button>
+        </div>
         <CrearClienteModal
           abierto={estadoModalCliente}
           cerrarModal={cerrarModalCliente}
           actualizarCliente={setCliente}
           setClienteId={setClienteId}
         />
-        <div>
+        <div class = "tituloConBoton">
           <input
-            class="form-control"
+            class="flex"
+            placeholder= "buscar por DNI"
             value={dniABuscar}
             onChange={cambiarDniABuscar}
           />
-          <Button onClick={buscarClientePorDni}> Buscar por DNI</Button>
+          <Button onClick={buscarClientePorDni}> Buscar</Button>
         </div>
         <div>
           <label>Nombre: {cliente.nombre}</label>
@@ -115,7 +118,6 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             Nivel discapacidad visual: {cliente.nivelDiscapacidadVisual}
           </label>
         </div>
-      </div>
-    </div>
+      </Fragment>
   );
 }

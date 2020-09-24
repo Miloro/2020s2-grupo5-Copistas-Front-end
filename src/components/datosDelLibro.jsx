@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, {Fragment, useState} from "react";
 
 import Button from "react-bootstrap/Button";
 import CrearLibroModal from "./crearLibroModal";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { getLibros} from "./Api";
 
 export default function DatosDelLibro({ libroId }) {
   const [estadoModalLibro, setEstadoModalLibro] = useState(false);
+    const [tituloABuscar, setTituloABuscar] = useState("");
   const [libro, setLibro] = useState({
     titulo: "",
     nombreAutor: "",
@@ -25,6 +27,23 @@ export default function DatosDelLibro({ libroId }) {
     setEstadoModalLibro(false);
   };
 
+    const cambiarTituloABuscar = (event) => {
+        setTituloABuscar(event.target.value);
+    };
+
+    const buscarLibroPorTitulo = () => {
+        getLibros(tituloABuscar).then((libros) => {
+            !!libros[0]
+                ? setearLibro(libros[0])
+                : setLibro(libro);
+        });
+    };
+
+    const setearLibro = (libro) => {
+        setLibro(libro);
+        libroId(libro.id);
+    };
+
   return (
     <div>
       Libro
@@ -35,6 +54,15 @@ export default function DatosDelLibro({ libroId }) {
         actualizarLibro={setLibro}
         libroId={libroId}
       />
+        <div className="tituloConBoton">
+            <input
+                className="flex"
+                placeholder="buscar por DNI"
+                value={tituloABuscar}
+                onChange={cambiarTituloABuscar}
+            />
+            <Button onClick={buscarLibroPorTitulo}> Buscar</Button>
+        </div>
       <div>
         <label>Título: {libro.titulo}</label>
       </div>

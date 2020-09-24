@@ -27,7 +27,9 @@ export default function HojaDeRuta() {
   return (
     <Fragment>
       <NavBar></NavBar>
+
       <Container>
+        <h1 className={"mb-4"}>CREAR HOJA DE RUTA</h1>
         <Row>
           <Col>
             <DatosDelCliente
@@ -46,7 +48,7 @@ export default function HojaDeRuta() {
           </Col>
         </Row>
         <Row>
-          <Button onClick={enviarHojaDeRuta}> crear hoja de ruta </Button>
+          <Button onClick={enviarHojaDeRuta}> Crear </Button>
         </Row>
       </Container>
     </Fragment>

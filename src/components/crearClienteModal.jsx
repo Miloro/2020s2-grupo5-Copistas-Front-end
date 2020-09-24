@@ -20,13 +20,13 @@ export default function CrearClienteModal({
     id: "",
     nombre: "",
     apellido: "",
-    dni: 0,
-    cuilORcuit: 0,
+    dni: "",
+    cuilORcuit: "",
     domicilio: "",
     ciudad: "",
     provincia: "",
-    telefonoFijo: 0,
-    telefonoMovil: 0,
+    telefonoFijo: "",
+    telefonoMovil: "",
     correoElectronico: "",
     fechaDeNacimiento: new Date(),
     sexo: "HOMBRE",
@@ -47,6 +47,16 @@ export default function CrearClienteModal({
     });
   };
 
+  const handleInputNumberChange = (event) => {
+    if (!Number(event.target.value) && event.target.value !== "") {
+      return;
+    }
+    setCliente({
+      ...cliente,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const enviarDatos = (event) => {
     event.preventDefault();
     crearCliente(cliente).then((clienteCreado) => {
@@ -59,10 +69,11 @@ export default function CrearClienteModal({
 
   const handleChange = (date) => {
     setCliente({
+      ...cliente,
       fechaDeNacimiento: date,
     });
-    console.log(cliente.fechaDeNacimiento.toString("YYYY-MM-dd"));
   };
+
 
   return (
     <Modal show={abierto} onHide={cerrarModal}>
@@ -74,47 +85,61 @@ export default function CrearClienteModal({
           <InputForm
             label="Nombre"
             name="nombre"
+            value={cliente.nombre}
             onChange={handleInputChange}
           />
           <InputForm
             label="Apellido"
             name="apellido"
+            value={cliente.apellido}
             onChange={handleInputChange}
           />
-          <InputForm label="DNI" name="dni" onChange={handleInputChange} />
+          <InputForm
+              label="DNI"
+              name="dni"
+              value={cliente.dni}
+              onChange={handleInputNumberChange}
+          />
           <InputForm
             label="CUIL o CUIT"
             name="cuilORcuit"
-            onChange={handleInputChange}
+            value={cliente.cuilORcuit}
+            onChange={handleInputNumberChange}
           />
           <InputForm
             label="Domicilio"
             name="domicilio"
+            value={cliente.domicilio}
             onChange={handleInputChange}
           />
           <InputForm
             label="Ciudad"
             name="ciudad"
+            value={cliente.ciudad}
             onChange={handleInputChange}
           />
           <InputForm
             label="Provincia"
             name="provincia"
+            value={cliente.provincia}
             onChange={handleInputChange}
           />
           <InputForm
             label="Telefono fijo"
             name="telefonoFijo"
-            onChange={handleInputChange}
+            value={cliente.telefonoFijo}
+            onChange={handleInputNumberChange}
           />
           <InputForm
             label="Telefono movil"
             name="telefonoMovil"
-            onChange={handleInputChange}
+            value={cliente.telefonoMovil}
+            onChange={handleInputNumberChange}
           />
           <InputForm
             label="Correo electronico"
             name="correoElectronico"
+            value={cliente.correoElectronico}
             onChange={handleInputChange}
           />
           <div>
@@ -132,13 +157,12 @@ export default function CrearClienteModal({
             <input type="radio" value="MUJER" name="gender" /> Mujer
           </div>
           <div>
-            <label>Nivel discapacidad visual</label>
-            <input
-              placeholder="Nivel discapacidad visual"
-              className="form-control"
-              onChange={handleInputChange}
-              name="nivelDiscapacidadVisual"
-            ></input>
+            <InputForm
+                label="Nivel discapacidad visual"
+                name="nivelDiscapacidadVisual"
+                value={cliente.nivelDiscapacidadVisual}
+                onChange={handleInputChange}
+            />
           </div>
         </form>
       </Modal.Body>
