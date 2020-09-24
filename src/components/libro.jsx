@@ -36,11 +36,4 @@ export default function Libro({ libro }) {
 
 
     );
-    /*
-        return (
-            <div key={libro.id}>
-
-            </div>
-        );
-        */
 }

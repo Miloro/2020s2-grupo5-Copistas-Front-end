@@ -2,7 +2,7 @@ import React, {Fragment, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+import Alert from 'react-bootstrap/Alert'
 import Button from "react-bootstrap/Button";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,9 +19,35 @@ export default function HojaDeRuta() {
 
   const [libro_id, setLibro_id] = useState();
 
+
+  const [estadoAlert, setEstadoAlert] = useState({
+    show: false,
+    estado: '',
+    cuerpo: ""
+
+  });
+
+
   const enviarHojaDeRuta = () => {
     //catch falta algun ID
-    crearHojaDeRuta(destinatario_id, solicitante_id, libro_id);
+
+    if(destinatario_id === undefined || solicitante_id === undefined || libro_id === undefined){
+      setEstadoAlert({
+        show: true,
+        estado: 'danger',
+        cuerpo: "falta completar datos"
+      })
+    }else{
+      crearHojaDeRuta(destinatario_id, solicitante_id, libro_id).then((hojaDeRuta)=>{
+        setEstadoAlert({
+          show: true,
+          estado: 'success',
+          cuerpo: "se creo la hoja de ruta correctamente"
+        })
+      })
+    }
+
+
   };
 
   return (
@@ -30,6 +56,17 @@ export default function HojaDeRuta() {
 
       <Container>
         <h1 className={"mb-4"}>CREAR HOJA DE RUTA</h1>
+        <Alert show={estadoAlert.show} variant= {estadoAlert.estado}>
+          <p>
+            {estadoAlert.cuerpo}
+          </p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button onClick={() => setEstadoAlert({...estadoAlert, show: false})} variant="outline-success">
+              Cerrar
+            </Button>
+          </div>
+        </Alert>
         <Row>
           <Col>
             <DatosDelCliente
