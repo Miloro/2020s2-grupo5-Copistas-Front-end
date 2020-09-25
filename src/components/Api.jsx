@@ -3,12 +3,12 @@ const axios = require('axios');
 axios.defaults.baseURL = 'http://localhost:8080/api';
 
 async function getLibros(titulo) {
-    const { data: libros } = await axios.get('/libro?titulo=' + titulo);
+    const {data: libros} = await axios.get('/libro?titulo=' + titulo);
     return libros;
 }
 
 async function getHojaDeRuta(idLibro) {
-    const { data: hojaDeRuta } = await axios.get('/hojaderuta/libro/' + idLibro);
+    const {data: hojaDeRuta} = await axios.get('/hojaderuta/libro/' + idLibro);
     return hojaDeRuta;
 }
 
@@ -35,8 +35,8 @@ async function crearHojaDeRuta(destinatario, solicitante, libro) {
 }
 
 async function getClientePorDNI(dni) {
-    const { data: clientes } = await axios.get('/cliente?dni=' + dni);
+    const {data: clientes} = await axios.get('/cliente?dni=' + dni);
     return clientes;
 }
 
-export { getLibros, getHojaDeRuta, crearCliente, crearLibro, crearHojaDeRuta, getClientePorDNI }
+export {getLibros, getHojaDeRuta, crearCliente, crearLibro, crearHojaDeRuta, getClientePorDNI}

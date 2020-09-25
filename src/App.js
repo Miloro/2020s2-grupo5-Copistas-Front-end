@@ -6,18 +6,6 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
-  /*cerrarLibroModal = () => {
-    this.setState({
-        show: false
-      });
-    }
-  
-    abrirLibroModal = () => {
-    this.setState({
-        show: true
-    });
-  }
-  */
 
   return (
     <BrowserRouter>
