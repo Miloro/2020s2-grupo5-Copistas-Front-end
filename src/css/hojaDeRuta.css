@@ -1,0 +1,36 @@
+.tituloConBoton {
+    display: flex;
+    margin-top: 1rem;
+}
+
+#contenedor {
+    background: #212936;
+    font-family: Roboto;
+    color: #AFBDD1;
+}
+
+.botonHojaDeRuta{
+    margin: 3rem;
+
+}
+h4{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0.15000000596046448px;
+    text-align: left;
+    color: #AFBDD1;
+    margin-right: 1rem;
+}
+
+h1{
+
+    color: #AFBDD1;
+}
+
+body{
+    background: #2B3648;
+
+
+}
