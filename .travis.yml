@@ -1,4 +1,8 @@
 language: node_js
 node_js:
   - 10.19.0
-cache: yarn
+script: echo "Running tests against $(node -v) ..."
+
+cache:
+  directories:
+    - "node_modules"
