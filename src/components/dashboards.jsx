@@ -42,6 +42,39 @@ function GraficosDeTorta({ data }) {
         ]}
         class="w-25 p-3"
       ></GraficoDeTorta>
+
+      <GraficoDeTorta
+        elementos={["Libros pagados", "Impagos"]}
+        cantidades={[
+          data.dashboardCantidadPagadosDTO.pagados,
+          data.dashboardCantidadPagadosDTO.inpagos,
+        ]}
+        class="w-25 p-3"
+      ></GraficoDeTorta>
+
+      <GraficoDeTorta
+        elementos={["Libros retirados", "Libros no retirados"]}
+        cantidades={[
+          data.dashboardCantidadDeLibrosRetiradosDTO.retirados,
+          data.dashboardCantidadDeLibrosRetiradosDTO.noRetirados,
+        ]}
+        class="w-25 p-3"
+      ></GraficoDeTorta>
+
+      <GraficoDeTorta
+        elementos={["espaniol", "ingles", "italiano", "aleman", "frances", "japones", "chino", "holandes"]}
+        cantidades={[
+          data.dashboardCantidadDeLibrosIdiomaDTO.espaniol,
+          data.dashboardCantidadDeLibrosIdiomaDTO.ingles,
+          data.dashboardCantidadDeLibrosIdiomaDTO.italiano,
+          data.dashboardCantidadDeLibrosIdiomaDTO.aleman,
+          data.dashboardCantidadDeLibrosIdiomaDTO.frances,
+          data.dashboardCantidadDeLibrosIdiomaDTO.japones,
+          data.dashboardCantidadDeLibrosIdiomaDTO.chino,
+          data.dashboardCantidadDeLibrosIdiomaDTO.holandes,
+        ]}
+        class="w-25 p-3"
+      ></GraficoDeTorta>
     </Fragment>
   );
 }
