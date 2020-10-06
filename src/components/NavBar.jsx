@@ -1,38 +1,54 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 
 import LogoImg from "./LogoImg";
 
 export default class NavBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
+  }
 
-    cambiarTituloABuscar(event) {
-        this.setState({tituloABuscar: event.target.value});
-    }
+  cambiarTituloABuscar(event) {
+    this.setState({ tituloABuscar: event.target.value });
+  }
 
-    render() {
-        return (
-            <Fragment>
-                <nav id={"navBar"} className="navbar navbar-expand-lg navbar-dark bg-primary m-3 ">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarTogglerDemo03"
-                            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
+  render() {
+    return (
+      <Fragment>
+        <nav
+          id={"navBar"}
+          className="navbar navbar-expand-lg navbar-dark bg-primary m-3 "
+        >
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-                    <LogoImg class="img-rounded" alt="Cinque Terre" className="logo"/>
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-                        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li className="nav-item">
-                                <a className="nav-link" href="/hojaDeRuta">Crear Hoja De Ruta</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </Fragment>
-        );
-    }
+          <LogoImg class="img-rounded" alt="Cinque Terre" className="logo" />
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li className="nav-item">
+                <a className="nav-link" href="/hojaDeRuta">
+                  Crear Hoja De Ruta
+                </a>
+              </li>
+              <li className="nav_link">
+                <a className="nav-link" href="/graficos">
+                  Graficos
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </Fragment>
+    );
+  }
 }
