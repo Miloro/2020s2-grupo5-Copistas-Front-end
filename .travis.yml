@@ -3,6 +3,3 @@ node_js:
   - 10.19.0
 script: echo "Running tests against $(node -v) ..."
 
-cache:
-  directories:
-    - "node_modules"
