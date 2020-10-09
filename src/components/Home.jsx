@@ -57,11 +57,16 @@ export default class Home extends React.Component {
             Buscar
           </button>
         </form>
-        <CardDeck class="d-flex  justify-content-around flex-wrap">
-          {this.state.libros.map((libro, key) => (
-            <Libro libro={libro} />
-          ))}
-        </CardDeck>
+
+        <div class="container">
+          <div class="row">
+            <CardDeck class="d-flex  justify-content-around flex-wrap">
+              {this.state.libros.map((libro, key) => (
+                <Libro libro={libro} />
+              ))}
+            </CardDeck>
+          </div>
+        </div>
       </Fragment>
     );
   }

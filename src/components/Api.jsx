@@ -44,6 +44,14 @@ async function getDashboard() {
   return dashboard;
 }
 
+async function agregarIteracionParaHojaDeRuta(idHojaDeRuta, iteracion) {
+  const res = await axios.put(
+    "/hojaderuta/historial/" + idHojaDeRuta,
+    iteracion
+  );
+  return res;
+}
+
 export {
   getLibros,
   getHojaDeRuta,
@@ -52,4 +60,5 @@ export {
   crearHojaDeRuta,
   getClientePorDNI,
   getDashboard,
+  agregarIteracionParaHojaDeRuta,
 };
