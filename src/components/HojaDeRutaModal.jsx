@@ -21,7 +21,10 @@ export default function HojaDeRutaModal({ libro, abierto, cerrarModal }) {
   function mostrarData() {
     return (
       <div>
-        {hojaDeRuta.solicitante.nombre}
+        Nombre de cliente: {hojaDeRuta.solicitante.nombre}<br/>
+        Apellido de cliente: {hojaDeRuta.solicitante.apellido}<br/>
+        Dni del Cliente: {hojaDeRuta.solicitante.dni}<br/>
+        Titulo del Libro: {hojaDeRuta.libro.titulo}<br/>
         {mostrarIteraciones()}
       </div>
     );
