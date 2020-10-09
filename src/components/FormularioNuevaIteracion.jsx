@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import Button from "react-bootstrap/Button";
+import { Form,  Button,  Col,  } from "react-bootstrap";
 import { agregarIteracionParaHojaDeRuta } from "./Api";
 
-export default function NuevaIteracion() {
+export default function NuevaIteracion({idHojaDeRuta}) {
   const [personaencargada, setPersonaEncargada] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [estadoDeIteracion, setestadoDeIteracion] = useState("DIGITALIZACION");
@@ -26,36 +26,41 @@ export default function NuevaIteracion() {
       fechaAsignacion: formatoDia(startDate),
       tareaAsignada: estadoDeIteracion,
     };
-    agregarIteracionParaHojaDeRuta(24, instancia);
+    agregarIteracionParaHojaDeRuta(idHojaDeRuta, instancia);
   };
 
   return (
     <div>
-      <form action="">
-        <input
-          name="personaEncargada"
-          value={personaencargada}
-          onChange={cambiarImputPersonaEncargada}
-          placeholder="Persona encargada"
-          className="form-control"
-        />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => cambiarDia(date)}
-        />
-        <label>
-          <select value={estadoDeIteracion} onChange={handleChange}>
-            <option value="DIGITALIZACION">DIGITALIZACION</option>
-            <option value="CORRECION">CORRECION</option>
-            <option value="VISADO">VISADO</option>
-            <option value="ENVIO_DE_MAIL">ENVIO_DE_MAIL</option>
-            <option value="IMPRESION_EN_BRAILE">IMPRESION_EN_BRAILE</option>
-            <option value="ANILLADO">ANILLADO</option>
-          </select>
-        </label>
-      </form>
+      <Form>
+        <Form.Row>
+          <Col>
+            <Form.Control
+              name="personaEncargada"
+              value={personaencargada}
+              onChange={cambiarImputPersonaEncargada}
+              placeholder="Persona encargada"
+              className="form-control"/>
+          </Col>
+          <Col>
+              <DatePicker
+              selected={startDate}
+              onChange={(date) => cambiarDia(date)}
+              />
+          </Col>
+          <Col>
+          <Form.Control size="sm" as="select" value={estadoDeIteracion} onChange={handleChange} >
+              <option value="DIGITALIZACION">DIGITALIZACION</option>
+              <option value="CORRECION">CORRECION</option>
+              <option value="VISADO">VISADO</option>
+              <option value="ENVIO_DE_MAIL">ENVIO_DE_MAIL</option>
+              <option value="IMPRESION_EN_BRAILE">IMPRESION_EN_BRAILE</option>
+              <option value="ANILLADO">ANILLADO</option>
+          </Form.Control>
+          </Col>
+        </Form.Row>
+      </Form>
       <Button variant="primary" onClick={enviarDatos}>
-        Guardar cliente
+        Crear tarea
       </Button>
     </div>
   );
