@@ -18,7 +18,7 @@ export default function Dashboards() {
   return (
     <div>
       <NavBar></NavBar>
-      <div class="d-flex flex-row bd-highlight mb-3">
+      <div className="d-flex flex-row bd-highlight mb-3">
         {!!dashBoards ? <GraficosDeTorta data={dashBoards} /> : "cargando"}
       </div>
     </div>
@@ -31,7 +31,7 @@ function GraficosDeTorta({ data }) {
       <GraficoDeTorta
         elementos={["Mujeres", "Hombres"]}
         cantidades={[data.dashboardSexoDTO.mujer, data.dashboardSexoDTO.hombre]}
-        class="w-25 p-3"
+        className="w-25 p-3"
       ></GraficoDeTorta>
 
       <GraficoDeTorta
@@ -40,7 +40,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardNivelCegueraDTO.total,
           data.dashboardNivelCegueraDTO.parcial,
         ]}
-        class="w-25 p-3"
+        className="w-25 p-3"
       ></GraficoDeTorta>
 
       <GraficoDeTorta
@@ -49,7 +49,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadPagadosDTO.pagados,
           data.dashboardCantidadPagadosDTO.inpagos,
         ]}
-        class="w-25 p-3"
+        className="w-25 p-3"
       ></GraficoDeTorta>
 
       <GraficoDeTorta
@@ -58,7 +58,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadDeLibrosRetiradosDTO.retirados,
           data.dashboardCantidadDeLibrosRetiradosDTO.noRetirados,
         ]}
-        class="w-25 p-3"
+        className="w-25 p-3"
       ></GraficoDeTorta>
 
       <GraficoDeTorta
@@ -73,7 +73,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadDeLibrosIdiomaDTO.chino,
           data.dashboardCantidadDeLibrosIdiomaDTO.holandes,
         ]}
-        class="w-25 p-3"
+        className="w-25 p-3"
       ></GraficoDeTorta>
     </Fragment>
   );

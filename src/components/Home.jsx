@@ -40,6 +40,7 @@ export default class Home extends React.Component {
     });
   };
 
+
   render() {
     return (
       <Fragment>
@@ -58,9 +59,9 @@ export default class Home extends React.Component {
           </button>
         </form>
 
-        <div class="container">
-          <div class="row">
-            <CardDeck class="d-flex  justify-content-around flex-wrap">
+        <div className="container">
+          <div className="row">
+            <CardDeck className="d-flex  justify-content-around flex-wrap">
               {this.state.libros.map((libro, key) => (
                 <Libro libro={libro} />
               ))}

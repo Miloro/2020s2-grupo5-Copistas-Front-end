@@ -87,7 +87,7 @@ export default function HojaDeRuta() {
                         <DatosDelLibro libroId={setLibro_id}/>
                     </Col>
                 </Row>
-                <div class="pull-right button-group">
+                <div className="pull-right button-group">
                     <Button className={"m-4 "} onClick={enviarHojaDeRuta}> Crear </Button>
                 </div>
             </Container>

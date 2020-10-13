@@ -57,6 +57,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
     setClienteId(cliente.id);
   };
 
+
   return (
     <Fragment>
       <CrearClienteModal
@@ -72,16 +73,16 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             <h4>{titulo}</h4>
             <button
               type="button"
-              class="btn btn-primary "
+              className="btn btn-primary "
               onClick={abrirModalCliente}
             >
               +
             </button>
           </div>
 
-          <div class="tituloConBoton">
+          <div className="tituloConBoton">
             <input
-              class="flex"
+              className="flex"
               placeholder="buscar por DNI"
               value={dniABuscar}
               onChange={cambiarDniABuscar}

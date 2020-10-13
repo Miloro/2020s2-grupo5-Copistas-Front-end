@@ -1,14 +1,7 @@
 import React, {useState} from "react";
-import {Modal} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import {crearCliente} from "./Api";
-import Button from "react-bootstrap/Button";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {registerLocale} from "react-datepicker";
-import es from "date-fns/locale/es";
-
-registerLocale("es", es);
+import {Button, Form, InputGroup, Col, Modal} from "react-bootstrap";
 
 export default function CrearClienteModal({
                                               abierto,
@@ -28,17 +21,12 @@ export default function CrearClienteModal({
         telefonoFijo: "",
         telefonoMovil: "",
         correoElectronico: "",
-        fechaDeNacimiento: new Date(),
+        fechaDeNacimiento: "",
         sexo: "HOMBRE",
-        nivelDiscapacidadVisual: "",
+        nivelDiscapacidadVisual: "TOTAL",
     });
 
-    const cambiarOpcionSexo = (event) => {
-        setCliente({
-            ...cliente,
-            sexo: event.target.value,
-        });
-    };
+    const [validated, setValidated] = useState(false);
 
     const handleInputChange = (event) => {
         setCliente({
@@ -57,133 +45,191 @@ export default function CrearClienteModal({
         });
     };
 
-    const enviarDatos = (event) => {
-        event.preventDefault();
-        crearCliente(cliente).then((clienteCreado) => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }else{
+            crearCliente(cliente).then((clienteCreado) => {
             actualizarCliente(clienteCreado);
             setClienteId(clienteCreado.id);
-            console.log(clienteCreado);
-        });
-        cerrarModal();
-    };
+            });
+            cerrarModal();}
+        setValidated(true);
 
-    const handleChange = (date) => {
-        setCliente({
-            ...cliente,
-            fechaDeNacimiento: date,
-        });
-    };
-
+      };
 
     return (
-        <Modal show={abierto} onHide={cerrarModal}>
+        <Modal show={abierto} onHide={cerrarModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Crear Cliente</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <form>
-                    <InputForm
-                        label="Nombre"
-                        name="nombre"
-                        value={cliente.nombre}
-                        onChange={handleInputChange}
-                    />
-                    <InputForm
-                        label="Apellido"
-                        name="apellido"
-                        value={cliente.apellido}
-                        onChange={handleInputChange}
-                    />
-                    <InputForm
-                        label="DNI"
-                        name="dni"
-                        value={cliente.dni}
-                        onChange={handleInputNumberChange}
-                    />
-                    <InputForm
-                        label="CUIL o CUIT"
-                        name="cuilORcuit"
-                        value={cliente.cuilORcuit}
-                        onChange={handleInputNumberChange}
-                    />
-                    <InputForm
-                        label="Domicilio"
-                        name="domicilio"
-                        value={cliente.domicilio}
-                        onChange={handleInputChange}
-                    />
-                    <InputForm
-                        label="Ciudad"
-                        name="ciudad"
-                        value={cliente.ciudad}
-                        onChange={handleInputChange}
-                    />
-                    <InputForm
-                        label="Provincia"
-                        name="provincia"
-                        value={cliente.provincia}
-                        onChange={handleInputChange}
-                    />
-                    <InputForm
-                        label="Telefono fijo"
-                        name="telefonoFijo"
-                        value={cliente.telefonoFijo}
-                        onChange={handleInputNumberChange}
-                    />
-                    <InputForm
-                        label="Telefono movil"
-                        name="telefonoMovil"
-                        value={cliente.telefonoMovil}
-                        onChange={handleInputNumberChange}
-                    />
-                    <InputForm
-                        label="Correo electronico"
-                        name="correoElectronico"
-                        value={cliente.correoElectronico}
-                        onChange={handleInputChange}
-                    />
-                    <div>
-                        <label>Fecha de nacimiento </label> <br/>
-                        <DatePicker
-                            selected={cliente.fechaDeNacimiento}
-                            onChange={handleChange}
-                            locale="es"
-                            dateFormat="dd/MM/yyyy"
-                        />
-                    </div>
-                    <div onChange={cambiarOpcionSexo}>
-                        <label>Sexo</label> <br/>
-                        <input type="radio" value="HOMBRE" name="gender"/> Hombre
-                        <input type="radio" value="MUJER" name="gender"/> Mujer
-                    </div>
-                    <div>
-                        <InputForm
-                            label="Nivel discapacidad visual"
-                            name="nivelDiscapacidadVisual"
-                            value={cliente.nivelDiscapacidadVisual}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                </form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={cerrarModal}>
-                    Cerrar
-                </Button>
-                <Button variant="primary" onClick={enviarDatos}>
-                    Guardar cliente
-                </Button>
-            </Modal.Footer>
+        <Modal.Body>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form.Row xs={1} md={4}>
+                        <Col>
+                            <InputForm
+                                label="Nombre"
+                                name="nombre"
+                                value={cliente.nombre}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="Apellido"
+                                name="apellido"
+                                value={cliente.apellido}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                type="number"
+                                label="DNI"
+                                name="dni"
+                                value={cliente.dni}
+                                onChange={handleInputNumberChange}
+                                required
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="CUIL o CUIT"
+                                name="cuilORcuit"
+                                value={cliente.cuilORcuit}
+                                onChange={handleInputNumberChange}
+                            />
+                        </Col>
+                </Form.Row>
+                <Form.Row xs={1} md={3}>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Fecha de nacimiento</Form.Label>
+                                <Form.Control type="date" name="fechaDeNacimiento" onChange={handleInputChange} />
+                            </Form.Group>
+                        </Col>
+                        <Col >
+                            <ImputRadioGeneroForm label="Sexo" cambiarOpcionSexo = {handleInputChange} />
+                        </Col>
+                        <Col >
+                            <Form.Group>
+                                <Form.Label>Nivel discapacidad visual</Form.Label>
+                                <Form.Control size="sm" name="nivelDiscapacidadVisual" as="select" value={cliente.nivelDiscapacidadVisual} onChange={handleInputChange} >
+                                    <option value="TOTAL">Total</option>
+                                    <option value="PARCIAL">Parcial</option>
+                                    <option value="NINGUNA">Ninguna</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Col>
+                </Form.Row>
+                <Form.Row xs={1} md={3}>
+                        <Col>
+                            <InputForm
+                                label="Domicilio"
+                                name="domicilio"
+                                value={cliente.domicilio}
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="Ciudad"
+                                name="ciudad"
+                                value={cliente.ciudad}
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="Provincia"
+                                name="provincia"
+                                value={cliente.provincia}
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                </Form.Row>
+                <Form.Row xs={1} md={3}>
+                        <Col>
+                            <InputForm
+                                label="Telefono fijo"
+                                name="telefonoFijo"
+                                value={cliente.telefonoFijo}
+                                onChange={handleInputNumberChange}
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="Telefono movil"
+                                name="telefonoMovil"
+                                value={cliente.telefonoMovil}
+                                onChange={handleInputNumberChange}
+                            />
+                        </Col>
+                        <Col >
+                            <InputForm
+                                label="Correo electronico"
+                                name="correoElectronico"
+                                value={cliente.correoElectronico}
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                </Form.Row>
+                <Button type="submit"  >Guardar cliente</Button>
+            </Form>
+        </Modal.Body>
         </Modal>
     );
 }
 
-function InputForm({label, ...props}) {
-    //name onchange
-    return (
-        <div>
-            <label>{label}</label>
-            <input {...props} placeholder={label} className="form-control"></input>
-        </div>
-    );
+function InputForm({label, mensajeControlInvalid = "este parametro es obligatorio.", ...props}){
+    return(
+        <Form.Group>
+            <Form.Label>{label}</Form.Label>
+            <InputGroup>
+                <Form.Control
+                {...props}
+                type="text"
+                placeholder={label}
+                aria-describedby="inputGroupPrepend"
+                />
+                <Form.Control.Feedback type="invalid">
+                    {mensajeControlInvalid}
+                </Form.Control.Feedback>
+            </InputGroup>
+        </Form.Group>
+    )
+}
+
+function ImputRadioGeneroForm({label, cambiarOpcionSexo}){
+    return(
+    <Form.Group>
+        <Col>
+            <Form.Label>{label}</Form.Label>
+        </Col>
+        <Col onChange={cambiarOpcionSexo}  >
+                <Form.Check
+                    inline
+                    type="radio"
+                    label="Hombre"
+                    name="sexo"
+                    value="HOMBRE"
+
+                />
+                <Form.Check
+                    inline
+                    type="radio"
+                    label="Mujer"
+                    name="sexo"
+                    value="MUJER"
+
+                />
+        </Col>
+    </Form.Group>
+    )
+
 }
