@@ -90,45 +90,56 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             <Button onClick={buscarClientePorDni}> Buscar</Button>
           </div>
           <div>
-            <label>Nombre: {cliente.nombre}</label>
+            <label class="font-weight-bold" >Nombre:&nbsp;</label>
+            {cliente.nombre}
           </div>
           <div>
-            <label>Apellido: {cliente.apellido}</label>
+            <label class="font-weight-bold" >Apellido:&nbsp;</label>
+            {cliente.apellido}
           </div>
           <div>
-            <label>DNI: {cliente.dni}</label>
+            <label class="font-weight-bold">DNI:&nbsp;</label>
+            {cliente.dni}
           </div>
           <div>
-            <label>CUIL/CUIT: {cliente.cuilORcuit}</label>
+            <label class="font-weight-bold">CUIL/CUIT:&nbsp;</label>
+            {cliente.cuilORcuit}
           </div>
           <div>
-            <label>Domicilio: {cliente.domicilio}</label>
+            <label class="font-weight-bold">Fecha de nacimiento:&nbsp;</label>
+            {cliente.fechaDeNacimiento}
           </div>
           <div>
-            <label>Ciudad: {cliente.ciudad}</label>
+            <label class="font-weight-bold">Sexo:&nbsp;</label>
+            {cliente.sexo}
           </div>
           <div>
-            <label>Provincia: {cliente.provincia}</label>
+            <label class="font-weight-bold">Nivel discapacidad visual:&nbsp;</label>
+            {cliente.nivelDiscapacidadVisual}
           </div>
           <div>
-            <label>Teléfono Fijo: {cliente.telefonoFijo}</label>
+            <label class="font-weight-bold">Domicilio:&nbsp;</label>
+            {cliente.domicilio}
           </div>
           <div>
-            <label>Teléfono Movil: {cliente.telefonoMovil}</label>
+            <label class="font-weight-bold">Ciudad:&nbsp;</label>
+            {cliente.ciudad}
           </div>
           <div>
-            <label>eMail: {cliente.correoElectronico}</label>
+            <label class="font-weight-bold">Provincia:&nbsp;</label>
+            {cliente.provincia}
           </div>
           <div>
-            <label>Fecha de nacimiento: {cliente.fechaDeNacimiento}</label>
+            <label class="font-weight-bold">Teléfono Fijo:&nbsp;</label>
+            {cliente.telefonoFijo}
           </div>
           <div>
-            <label>Sexo: {cliente.sexo}</label>
+            <label class="font-weight-bold">Teléfono Movil:&nbsp;</label>
+            {cliente.telefonoMovil}
           </div>
           <div>
-            <label>
-              Nivel discapacidad visual: {cliente.nivelDiscapacidadVisual}
-            </label>
+            <label class="font-weight-bold">eMail:&nbsp;</label>
+            {cliente.correoElectronico}
           </div>
         </Container>
       </fieldset>
