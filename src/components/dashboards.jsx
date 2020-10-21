@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, Fragment } from "react";
+import React, { useState, useEffect , Fragment } from "react";
 import NavBar from "./NavBar";
 import { Pie } from "react-chartjs-2";
 import { getDashboard } from "./Api";
@@ -6,15 +6,12 @@ import { getDashboard } from "./Api";
 export default function Dashboards() {
   const [dashBoards, setDashBoards] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getDashboard().then((data) => {
       setDashBoards(data);
     });
   }, [dashBoards]);
 
-  /*
-
-  */
   return (
     <div>
       <NavBar></NavBar>
@@ -26,43 +23,51 @@ export default function Dashboards() {
 }
 
 function GraficosDeTorta({ data }) {
+
   return (
     <Fragment>
+
+      <div class="d-flex justify-content-around flex-wrap">
       <GraficoDeTorta
+        titulo = "Genero"
         elementos={["Mujeres", "Hombres"]}
         cantidades={[data.dashboardSexoDTO.mujer, data.dashboardSexoDTO.hombre]}
-        className="w-25 p-3"
       ></GraficoDeTorta>
 
       <GraficoDeTorta
+        titulo = "Discapacidad visual"
         elementos={["Total", "Parcial"]}
         cantidades={[
           data.dashboardNivelCegueraDTO.total,
           data.dashboardNivelCegueraDTO.parcial,
         ]}
-        className="w-25 p-3"
+
       ></GraficoDeTorta>
 
       <GraficoDeTorta
-        elementos={["Libros pagados", "Impagos"]}
+        titulo = "Libros Pagados"
+        elementos={["Pagados", "Impagos"]}
         cantidades={[
           data.dashboardCantidadPagadosDTO.pagados,
           data.dashboardCantidadPagadosDTO.inpagos,
         ]}
-        className="w-25 p-3"
+
       ></GraficoDeTorta>
 
       <GraficoDeTorta
-        elementos={["Libros retirados", "Libros no retirados"]}
+        titulo = "Libros Retirados"
+        elementos={["Retirado", "No Retirado"]}
         cantidades={[
           data.dashboardCantidadDeLibrosRetiradosDTO.retirados,
           data.dashboardCantidadDeLibrosRetiradosDTO.noRetirados,
         ]}
-        className="w-25 p-3"
+
       ></GraficoDeTorta>
 
       <GraficoDeTorta
-        elementos={["espaniol", "ingles", "italiano", "aleman", "frances", "japones", "chino", "holandes"]}
+        tamanio = {{width: 1200}}
+        titulo = "Libros por Idioma"
+        elementos={["Español", "Ingles", "Italiano", "Aleman", "Frances", "Japones", "Chino", "Holandes"]}
         cantidades={[
           data.dashboardCantidadDeLibrosIdiomaDTO.espaniol,
           data.dashboardCantidadDeLibrosIdiomaDTO.ingles,
@@ -73,37 +78,56 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadDeLibrosIdiomaDTO.chino,
           data.dashboardCantidadDeLibrosIdiomaDTO.holandes,
         ]}
-        className="w-25 p-3"
+
       ></GraficoDeTorta>
+      </div>
+
     </Fragment>
   );
 }
 
-function GraficoDeTorta({ elementos, cantidades, ...props }) {
+function GraficoDeTorta({tamanio = {width: 600},  titulo, elementos, cantidades}) {
+
   const [data] = useState({
     labels: elementos,
     datasets: [
       {
         data: cantidades,
         backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#36AAAA",
-          "#AAA2EB",
-          "#FF8884",
-          "#333384",
-          "#123456",
-          "#AB4235",
+          "#4a80cc",
+          "#c94b4b",
+          "#43a548",
+          "#d5db78",
+          "#d47f1e",
+          "#88def3",
+          "#ad3e8c",
+          "#4d1185",
           "#161616",
           "#442461",
         ],
       },
     ],
   });
-
+/*
+  useEffect(() => { 
+    var sum = cantidades.reduce(function(a, b){return a + b;}, 0);
+    var i;
+    var newList = []
+    var numero
+    for (i = 0; i < elementos.length; i++) {
+      numero = Math.round((100/sum) * cantidades[i])
+      newList.push(elementos[i] + '('+ numero +'%)')
+    }
+    setData({
+      ...data, 
+      labels : newList,
+    })
+  });
+*/
   return (
-    <div {...props}>
-      <Pie data={data} />
+    <div class="card border-secondary mb-3" style={tamanio}>
+      <div class="card-header">{titulo}</div>
+      <div class="card-body"><Pie data={data} /></div>
     </div>
   );
 }

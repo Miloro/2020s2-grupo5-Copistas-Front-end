@@ -156,7 +156,7 @@ export default function CrearClienteModal({
                 <Form.Row xs={1} md={3}>
                         <Col>
                             <InputForm
-                                label="Telefono fijo"
+                                label="Teléfono fijo"
                                 name="telefonoFijo"
                                 value={cliente.telefonoFijo}
                                 onChange={handleInputNumberChange}
@@ -164,7 +164,7 @@ export default function CrearClienteModal({
                         </Col>
                         <Col >
                             <InputForm
-                                label="Telefono movil"
+                                label="Teléfono movil"
                                 name="telefonoMovil"
                                 value={cliente.telefonoMovil}
                                 onChange={handleInputNumberChange}
@@ -172,7 +172,7 @@ export default function CrearClienteModal({
                         </Col>
                         <Col >
                             <InputForm
-                                label="Correo electronico"
+                                label="Correo electrónico"
                                 name="correoElectronico"
                                 value={cliente.correoElectronico}
                                 onChange={handleInputChange}
