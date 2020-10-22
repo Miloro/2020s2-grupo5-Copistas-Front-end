@@ -1,45 +1,33 @@
-import React, { useState } from "react";
+import React, {useState, Fragment, useEffect} from "react";
+import {useParams} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.css";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import {getLibros} from "./Api";
+
+import NavBar from "./NavBar";
 import HojaDeRutaModal from "./HojaDeRutaModal";
 
-export default function Libro({ libro }) {
-  const [abierto, setAbierto] = useState(false);
+export default function Libro({libro}) {
+    const {titulo} = useParams()
 
-  function mostrarEstadoLibro() {
-    setAbierto(true);
-  }
+    const [libroEncontrado, setLibroEncontrado] = useState();
 
-  function cerrarModal() {
-    setAbierto(false);
-  }
+    useEffect(() => {
+        getLibros(titulo).then((libros) => {
+            setLibroEncontrado(libros[0]);
+        });
+    }, []);
 
-  return (
-    <div class="col-sm-4">
-      <Card border="primary" style={{ width: "18rem" }}>
-        <Card.Header>
-          {" "}
-          {libro.titulo} <br />
-        </Card.Header>
-        <Card.Body>
-          <Card.Text>
-            nombre autor: {libro.nombreAutor} <br />
-            apellido autor: {libro.apellidoAutor} <br />
-            editorial: {libro.editorial} <br />
-            edicion: {libro.edicion} <br />
-            idioma: {libro.idioma} <br />
-            categoria: {libro.categoria} <br />
-          </Card.Text>
 
-          <Button onClick={mostrarEstadoLibro}> ver estado </Button>
-          <HojaDeRutaModal
-            libro={libro}
-            abierto={abierto}
-            cerrarModal={cerrarModal}
-          />
-        </Card.Body>
-      </Card>
-    </div>
-  );
+    return (
+        <Fragment>
+            <NavBar/>
+            <div>
+                {
+                    !!libroEncontrado ?
+                        <HojaDeRutaModal libro = {libroEncontrado} abierto={ true}/>:
+                        "buscando"
+                }
+            </div>
+        </Fragment>
+    )
 }

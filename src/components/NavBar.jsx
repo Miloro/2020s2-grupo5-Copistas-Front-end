@@ -1,54 +1,41 @@
-import React, { Fragment } from "react";
+import React, {Fragment,useState} from "react";
+import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
+import { useHistory } from "react-router-dom";
 
 import LogoImg from "./LogoImg";
 
-export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.cambiarTituloABuscar = this.cambiarTituloABuscar.bind(this);
-  }
+export default function NavBar() {
 
-  cambiarTituloABuscar(event) {
-    this.setState({ tituloABuscar: event.target.value });
-  }
+    let history = useHistory();
+    const [tituloABuscar,setTituloABuscar] = useState("")
 
-  render() {
+    function handleClick(event) {
+        history.push(event.target.name);
+    }
+
+    function cambioTituloABuscar(event){
+      setTituloABuscar(event.target.value)
+    };
+
+    function buscarLibro(){
+        history.push("/libro/"+ tituloABuscar);
+    }
+
+
     return (
-      <Fragment>
-        <nav
-          id={"navBar"}
-          className="navbar navbar-expand-lg navbar-dark bg-primary m-3 "
-        >
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <LogoImg class="img-rounded" alt="Cinque Terre" className="logo" />
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li className="nav-item">
-                <a className="nav-link" href="/hojaDeRuta">
-                  Crear Hoja De Ruta
-                </a>
-              </li>
-              <li className="nav_link">
-                <a className="nav-link" href="/graficos">
-                  Graficos
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </Fragment>
+        <Fragment>
+            <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary m-3 " variant="dark">
+                <LogoImg/>
+                <Nav className="mr-auto">
+                    <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>
+                    <Nav.Link onClick={handleClick} name="/graficos"  >Graficos</Nav.Link>
+                </Nav>
+                <Form inline onSubmit={buscarLibro}>
+                    <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
+                    <Button variant="outline-light">Buscar</Button>
+                </Form>
+            </Navbar>
+        </Fragment>
     );
-  }
 }
+

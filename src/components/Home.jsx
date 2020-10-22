@@ -1,8 +1,5 @@
 import React, { Fragment } from "react";
 import { getLibros } from "./Api";
-import Libro from "./libro";
-
-import CardDeck from "react-bootstrap/CardDeck";
 
 import NavBar from "./NavBar";
 
@@ -44,30 +41,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <Fragment>
-        <NavBar propiedades={this.state}></NavBar>
-        <form className="form-inline my-2 my-lg-0" onSubmit={this.buscarLibros}>
-          <label>
-            <input
-              className="form-control mr-sm-2"
-              placeholder="Buscar Libro Por titulo"
-              value={this.state.tituloABuscar}
-              onChange={this.cambiarTituloABuscar}
-            />
-          </label>
-          <button className="btn btn-outline-success my-2 my-sm-0">
-            Buscar
-          </button>
-        </form>
-
-        <div className="container">
-          <div className="row">
-            <CardDeck className="d-flex  justify-content-around flex-wrap">
-              {this.state.libros.map((libro, key) => (
-                <Libro libro={libro} />
-              ))}
-            </CardDeck>
-          </div>
-        </div>
+        <NavBar ></NavBar>
       </Fragment>
     );
   }
