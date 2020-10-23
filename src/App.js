@@ -6,9 +6,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import HojaDeRuta from "./components/HojaDeRuta";
-import Dashboards from "./components/dashboards";
+import Dashboards from "./components/Dashboards";
 import Login from "./components/Login";
-import Libro from "./components/libro";
+import Libro from "./components/Libro";
 
 
 function App() {

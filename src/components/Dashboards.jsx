@@ -14,7 +14,7 @@ export default function Dashboards() {
 
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar/>
       <div className="d-flex flex-row bd-highlight mb-3">
         {!!dashBoards ? <GraficosDeTorta data={dashBoards} /> : "cargando"}
       </div>
@@ -27,12 +27,12 @@ function GraficosDeTorta({ data }) {
   return (
     <Fragment>
 
-      <div class="d-flex justify-content-around flex-wrap">
+      <div className="d-flex justify-content-around flex-wrap">
       <GraficoDeTorta
         titulo = "Genero"
         elementos={["Mujeres", "Hombres"]}
         cantidades={[data.dashboardSexoDTO.mujer, data.dashboardSexoDTO.hombre]}
-      ></GraficoDeTorta>
+      />
 
       <GraficoDeTorta
         titulo = "Discapacidad visual"
@@ -42,7 +42,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardNivelCegueraDTO.parcial,
         ]}
 
-      ></GraficoDeTorta>
+      />
 
       <GraficoDeTorta
         titulo = "Libros Pagados"
@@ -52,7 +52,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadPagadosDTO.inpagos,
         ]}
 
-      ></GraficoDeTorta>
+      />
 
       <GraficoDeTorta
         titulo = "Libros Retirados"
@@ -62,7 +62,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadDeLibrosRetiradosDTO.noRetirados,
         ]}
 
-      ></GraficoDeTorta>
+      />
 
       <GraficoDeTorta
         tamanio = {{width: 1200}}
@@ -79,7 +79,7 @@ function GraficosDeTorta({ data }) {
           data.dashboardCantidadDeLibrosIdiomaDTO.holandes,
         ]}
 
-      ></GraficoDeTorta>
+      />
       </div>
 
     </Fragment>
@@ -108,26 +108,11 @@ function GraficoDeTorta({tamanio = {width: 600},  titulo, elementos, cantidades}
       },
     ],
   });
-/*
-  useEffect(() => { 
-    var sum = cantidades.reduce(function(a, b){return a + b;}, 0);
-    var i;
-    var newList = []
-    var numero
-    for (i = 0; i < elementos.length; i++) {
-      numero = Math.round((100/sum) * cantidades[i])
-      newList.push(elementos[i] + '('+ numero +'%)')
-    }
-    setData({
-      ...data, 
-      labels : newList,
-    })
-  });
-*/
+
   return (
-    <div class="card border-secondary mb-3" style={tamanio}>
-      <div class="card-header">{titulo}</div>
-      <div class="card-body"><Pie data={data} /></div>
+    <div className="card border-secondary mb-3" style={tamanio}>
+      <div className="card-header">{titulo}</div>
+      <div className="card-body"><Pie data={data} /></div>
     </div>
   );
 }

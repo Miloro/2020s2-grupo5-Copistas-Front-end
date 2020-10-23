@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Row, Col, Table} from "react-bootstrap";
+import {Row, Table} from "react-bootstrap";
 import "../css/hojaDeRuta.css"
 import NuevaIteracion from "./FormularioNuevaIteracion"
 import {getHojaDeRuta} from "./Api";

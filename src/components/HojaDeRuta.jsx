@@ -6,8 +6,8 @@ import Alert from 'react-bootstrap/Alert'
 import Button from "react-bootstrap/Button";
 
 import "react-datepicker/dist/react-datepicker.css";
-import DatosDelCliente from "./datosDelCliente";
-import DatosDelLibro from "./datosDelLibro";
+import DatosDelCliente from "./DatosDelCliente";
+import DatosDelLibro from "./DatosDelLibro";
 
 import {crearHojaDeRuta} from "./Api";
 import NavBar from "./NavBar";
@@ -40,7 +40,7 @@ export default function HojaDeRuta() {
                 boton: "outline-danger"
             })
         } else {
-            crearHojaDeRuta(destinatario_id, solicitante_id, libro_id).then((hojaDeRuta) => {
+            crearHojaDeRuta(destinatario_id, solicitante_id, libro_id).then(() => {
                 setEstadoAlert({
                     show: true,
                     estado: 'success',
@@ -55,8 +55,7 @@ export default function HojaDeRuta() {
 
     return (
         <Fragment>
-            <NavBar></NavBar>
-
+            <NavBar/>
             <Container>
                 <h1 className={"mb-4"}>CREAR HOJA DE RUTA</h1>
                 <Alert show={estadoAlert.show} variant={estadoAlert.estado}>

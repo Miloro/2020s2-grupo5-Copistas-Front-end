@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Button from "react-bootstrap/Button";
-import CrearClienteModal from "./crearClienteModal";
+import CrearClienteModal from "./CrearClienteModal";
 import { getClientePorDNI } from "./Api";
 import "../css/hojaDeRuta.css";
 
@@ -90,55 +90,55 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             <Button onClick={buscarClientePorDni}> Buscar</Button>
           </div>
           <div>
-            <label class="font-weight-bold" >Nombre:&nbsp;</label>
+            <label className="font-weight-bold" >Nombre:&nbsp;</label>
             {cliente.nombre}
           </div>
           <div>
-            <label class="font-weight-bold" >Apellido:&nbsp;</label>
+            <label className="font-weight-bold" >Apellido:&nbsp;</label>
             {cliente.apellido}
           </div>
           <div>
-            <label class="font-weight-bold">DNI:&nbsp;</label>
+            <label className="font-weight-bold">DNI:&nbsp;</label>
             {cliente.dni}
           </div>
           <div>
-            <label class="font-weight-bold">CUIL/CUIT:&nbsp;</label>
+            <label className="font-weight-bold">CUIL/CUIT:&nbsp;</label>
             {cliente.cuilORcuit}
           </div>
           <div>
-            <label class="font-weight-bold">Fecha de nacimiento:&nbsp;</label>
+            <label className="font-weight-bold">Fecha de nacimiento:&nbsp;</label>
             {cliente.fechaDeNacimiento}
           </div>
           <div>
-            <label class="font-weight-bold">Sexo:&nbsp;</label>
+            <label className="font-weight-bold">Sexo:&nbsp;</label>
             {cliente.sexo}
           </div>
           <div>
-            <label class="font-weight-bold">Nivel discapacidad visual:&nbsp;</label>
+            <label className="font-weight-bold">Nivel discapacidad visual:&nbsp;</label>
             {cliente.nivelDiscapacidadVisual}
           </div>
           <div>
-            <label class="font-weight-bold">Domicilio:&nbsp;</label>
+            <label className="font-weight-bold">Domicilio:&nbsp;</label>
             {cliente.domicilio}
           </div>
           <div>
-            <label class="font-weight-bold">Ciudad:&nbsp;</label>
+            <label className="font-weight-bold">Ciudad:&nbsp;</label>
             {cliente.ciudad}
           </div>
           <div>
-            <label class="font-weight-bold">Provincia:&nbsp;</label>
+            <label className="font-weight-bold">Provincia:&nbsp;</label>
             {cliente.provincia}
           </div>
           <div>
-            <label class="font-weight-bold">Teléfono Fijo:&nbsp;</label>
+            <label className="font-weight-bold">Teléfono Fijo:&nbsp;</label>
             {cliente.telefonoFijo}
           </div>
           <div>
-            <label class="font-weight-bold">Teléfono Movil:&nbsp;</label>
+            <label className="font-weight-bold">Teléfono Movil:&nbsp;</label>
             {cliente.telefonoMovil}
           </div>
           <div>
-            <label class="font-weight-bold">eMail:&nbsp;</label>
+            <label className="font-weight-bold">eMail:&nbsp;</label>
             {cliente.correoElectronico}
           </div>
         </Container>

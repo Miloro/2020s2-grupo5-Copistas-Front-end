@@ -6,12 +6,13 @@ import {getLibros} from "./Api";
 import NavBar from "./NavBar";
 import HojaDeRutaModal from "./HojaDeRutaModal";
 
-export default function Libro({libro}) {
+export default function Libro() {
     const {titulo} = useParams()
 
     const [libroEncontrado, setLibroEncontrado] = useState();
 
     useEffect(() => {
+        console.log("hola")
         getLibros(titulo).then((libros) => {
             setLibroEncontrado(libros[0]);
         });
