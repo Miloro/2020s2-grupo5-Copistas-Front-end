@@ -8,10 +8,11 @@ export default function HojaDeRutaModal({libro}) {
     const [hojaDeRuta, setHojaDeRuta] = useState();
 
     useEffect(() => {
+        console.log("hola")
         getHojaDeRuta(libro.id).then((unaHojaDeRuta) => {
             setHojaDeRuta(unaHojaDeRuta);
         });
-    }, []);
+    }, [libro   ]);
 
     function mostrarIteraciones() {
         return (<div>

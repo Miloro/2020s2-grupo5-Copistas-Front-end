@@ -12,11 +12,10 @@ export default function Libro() {
     const [libroEncontrado, setLibroEncontrado] = useState();
 
     useEffect(() => {
-        console.log("hola")
         getLibros(titulo).then((libros) => {
             setLibroEncontrado(libros[0]);
         });
-    }, []);
+    }, [titulo]);
 
 
     return (

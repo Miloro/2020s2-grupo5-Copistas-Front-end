@@ -1,19 +1,24 @@
 import React, {Fragment, useState} from "react";
 import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
-
+import {login} from "./Api";
 import "../css/Login.css";
 
 export default function Login() {
 
-    const [email, setEmail] = useState("");
+    const [nombreUsuario, setNombreUsuario] = useState("");
     const [password, setPassword] = useState("");
+    const [usuario, setUsuario] = useState();
   
     function validateForm() {
-      return email.length > 0 && password.length > 0;
+      return nombreUsuario.length > 0 && password.length > 0;
     }
   
     function handleSubmit(event) {
-      event.preventDefault();
+        event.preventDefault();
+        login(nombreUsuario, password).then((a) => {
+            setUsuario(a);
+        });
+
     }
 
     return (
@@ -22,12 +27,12 @@ export default function Login() {
                 <div class="row h-100 justify-content-center">
                     <div className="Login">
                     <form onSubmit={handleSubmit}>
-                        <FormGroup controlId="email" bsSize="large">
+                        <FormGroup controlId="nombreUsuario" bsSize="large">
                         <Form.Label>Usuario</Form.Label>
                         <FormControl
                             autoFocus
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            value={nombreUsuario}
+                            onChange={e => setNombreUsuario(e.target.value)}
                         />
                         </FormGroup>
                         <FormGroup controlId="password" bsSize="large">

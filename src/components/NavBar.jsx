@@ -32,8 +32,9 @@ export default function NavBar() {
                 </Nav>
                 <Form inline onSubmit={buscarLibro}>
                     <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
-                    <Button variant="outline-light">Buscar</Button>
+                    <Button onClick={buscarLibro} variant="outline-light">Buscar</Button>
                 </Form>
+                <Button onClick={()=>{}} className= "ml-3" variant="danger">Salir</Button>
             </Navbar>
         </Fragment>
     );
