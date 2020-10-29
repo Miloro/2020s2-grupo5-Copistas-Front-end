@@ -5,7 +5,7 @@ import logo from "../images/logo_copistas1.png";
 export default function LogoImg(){
 
         return (
-            <a href="/" className="navbar-brand">
+            <a href="/home" className="navbar-brand">
                 <img src={logo} width="30" height="30"
                      className="d-inline-block align-top" alt=""/>
                 Libraille

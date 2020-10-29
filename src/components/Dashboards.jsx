@@ -9,7 +9,7 @@ export default function Dashboards() {
   useEffect(() => {
     getDashboard().then((data) => {
       setDashBoards(data);
-    });
+    }).catch(e => alert(e));
   }, [dashBoards]);
 
   return (
