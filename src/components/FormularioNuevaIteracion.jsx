@@ -5,15 +5,15 @@ import { agregarIteracionParaHojaDeRuta } from "./Api";
 
 export default function NuevaIteracion({idHojaDeRuta}) {
   const [personaencargada, setPersonaEncargada] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState();
   const [estadoDeIteracion, setestadoDeIteracion] = useState("DIGITALIZACION");
 
   const cambiarImputPersonaEncargada = (event) => {
     setPersonaEncargada(event.target.value);
   };
 
-  const cambiarDia = (date) => {
-    setStartDate(date);
+  const cambiarDia = (event) => {
+    setStartDate(event.target.value);
   };
 
   const handleChange = (event) => {
@@ -32,8 +32,9 @@ export default function NuevaIteracion({idHojaDeRuta}) {
   return (
     <div>
       <Form>
-        <Form.Row>
+        <Form.Row xs={1} md={4}>
           <Col>
+            <Form.Label>Persona Encargada</Form.Label>
             <Form.Control
               name="personaEncargada"
               value={personaencargada}
@@ -42,12 +43,13 @@ export default function NuevaIteracion({idHojaDeRuta}) {
               className="form-control"/>
           </Col>
           <Col>
-              <DatePicker
-              selected={startDate}
-              onChange={(date) => cambiarDia(date)}
-              />
+            <Form.Group>
+              <Form.Label>Fecha</Form.Label>
+              <Form.Control type="date" name="fechaDeNacimiento" onChange={cambiarDia} />
+            </Form.Group>
           </Col>
           <Col>
+          <Form.Label>Tarea Asignada</Form.Label>
           <Form.Control size="sm" as="select" value={estadoDeIteracion} onChange={handleChange} >
               <option value="DIGITALIZACION">DIGITALIZACION</option>
               <option value="CORRECION">CORRECION</option>
@@ -57,11 +59,14 @@ export default function NuevaIteracion({idHojaDeRuta}) {
               <option value="ANILLADO">ANILLADO</option>
           </Form.Control>
           </Col>
+          <Col>
+            <Button variant="primary" onClick={enviarDatos}>
+              Crear tarea
+            </Button>
+          </Col>
         </Form.Row>
       </Form>
-      <Button variant="primary" onClick={enviarDatos}>
-        Crear tarea
-      </Button>
+
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function Login() {
             context.iniciarSesion(user)
             setUsuario(user);
             history.push("/home")
-        }).catch(e => alert(e));
+        }).catch(e => alert("usuario incorrecto"));
 
     }
 
