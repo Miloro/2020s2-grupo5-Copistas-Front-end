@@ -12,7 +12,7 @@ export default function CrearLibroModal({show, cerrarLibroModal, actualizarLibro
         "apellidoAutor": " ",
         "editorial": "",
         "edicion": "",
-        "idioma": "",
+        "idioma": "ESPAÑOL",
         "categoria": ""
     })
 
@@ -72,8 +72,16 @@ export default function CrearLibroModal({show, cerrarLibroModal, actualizarLibro
                 <Form.Row>
                              <Col>
                                 <label>Idioma</label>
-                                <input type="text" placeholder="Idioma" className="form-control" onChange={handleInputChange}
-                                 name="idioma"/>
+                                <Form.Control size="sm" name="idioma" as="select" value={libro.idioma} onChange={handleInputChange} >
+                                    <option value="ESPAÑOL">Español</option>
+                                    <option value="INGLES">Ingles</option>
+                                    <option value="ITALIANO">Italiano</option>
+                                    <option value="ALEMAN">Aleman</option>
+                                    <option value="FRANCES">Frances</option>
+                                    <option value="JAPONES">Japones</option>
+                                    <option value="CHINO">Chino</option>
+                                    <option value="HOLANDES">Holandes</option>
+                                </Form.Control>
                             </Col>
                              <Col>
                                 <label>Categoria</label>
