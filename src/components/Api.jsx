@@ -1,26 +1,46 @@
+import { obtenerSession } from '../sesion';
 const axios = require("axios");
+axios.defaults.baseURL = "http://localhost:8080/";
 
-axios.defaults.baseURL = "http://localhost:8080/api";
+
+function __getToken(){
+    const token = obtenerSession().data.token;
+
+  return{
+      headers : { Authorization: `Bearer ${token}` }
+  };
+
+}
+
+async function login(username, pass) {
+ const body = {
+    nombreUsuario : username,
+    password : pass
+  }
+
+  const usuario = await axios.post("auth/login", body);
+  return usuario;
+}
 
 async function getLibros(titulo) {
-  const { data: libros } = await axios.get("/libro?titulo=" + titulo);
+  const { data: libros } = await axios.get("api/libro?titulo=" + titulo, __getToken());
   return libros;
 }
 
-async function getHojaDeRuta(idLibro) {
-  const { data: hojaDeRuta } = await axios.get("/hojaderuta/libro/" + idLibro);
+async function getHojaDeRuta(idLibro,) {
+  const { data: hojaDeRuta } = await axios.get("api/hojaderuta/libro/" + idLibro, __getToken());
   return hojaDeRuta;
 }
 
 async function crearCliente(cliente) {
   const body = cliente;
-  const res = await axios.post("/cliente", body);
+  const res = await axios.post("api/cliente", body, __getToken());
   return res.data;
 }
 
 async function crearLibro(libro) {
   const body = libro;
-  const res = await axios.post("/libro", body);
+  const res = await axios.post("api/libro", body, __getToken());
   return res.data;
 }
 
@@ -30,24 +50,26 @@ async function crearHojaDeRuta(destinatario, solicitante, libro) {
     solicitante_id: solicitante,
     libro_id: libro,
   };
-  const res = await axios.post("/hojaderuta", body);
+  const res = await axios.post("api/hojaderuta", body, __getToken());
   return res.data;
 }
 
 async function getClientePorDNI(dni) {
-  const { data: clientes } = await axios.get("/cliente?dni=" + dni);
+  const { data: clientes } = await axios.get("api/cliente?dni=" + dni, __getToken());
   return clientes;
 }
 
 async function getDashboard() {
-  const { data: dashboard } = await axios.get("/dashboard");
+
+  const { data: dashboard } = await axios.get("api/dashboard", __getToken());
   return dashboard;
 }
 
 async function agregarIteracionParaHojaDeRuta(idHojaDeRuta, iteracion) {
   const res = await axios.put(
-    "/hojaderuta/historial/" + idHojaDeRuta,
-    iteracion
+    "api/hojaderuta/historial/" + idHojaDeRuta,
+    iteracion,
+    __getToken()
   );
   return res;
 }
@@ -61,4 +83,5 @@ export {
   getClientePorDNI,
   getDashboard,
   agregarIteracionParaHojaDeRuta,
+  login,
 };

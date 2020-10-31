@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Button from "react-bootstrap/Button";
-import CrearClienteModal from "./crearClienteModal";
+import CrearClienteModal from "./CrearClienteModal";
 import { getClientePorDNI } from "./Api";
 import "../css/hojaDeRuta.css";
 
@@ -57,6 +57,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
     setClienteId(cliente.id);
   };
 
+
   return (
     <Fragment>
       <CrearClienteModal
@@ -72,16 +73,16 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             <h4>{titulo}</h4>
             <button
               type="button"
-              class="btn btn-primary "
+              className="btn btn-primary "
               onClick={abrirModalCliente}
             >
               +
             </button>
           </div>
 
-          <div class="tituloConBoton">
+          <div className="tituloConBoton">
             <input
-              class="flex"
+              className="flex"
               placeholder="buscar por DNI"
               value={dniABuscar}
               onChange={cambiarDniABuscar}
@@ -89,45 +90,56 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
             <Button onClick={buscarClientePorDni}> Buscar</Button>
           </div>
           <div>
-            <label>Nombre: {cliente.nombre}</label>
+            <label className="font-weight-bold" >Nombre:&nbsp;</label>
+            {cliente.nombre}
           </div>
           <div>
-            <label>Apellido: {cliente.apellido}</label>
+            <label className="font-weight-bold" >Apellido:&nbsp;</label>
+            {cliente.apellido}
           </div>
           <div>
-            <label>DNI: {cliente.dni}</label>
+            <label className="font-weight-bold">DNI:&nbsp;</label>
+            {cliente.dni}
           </div>
           <div>
-            <label>CUIL/CUIT: {cliente.cuilORcuit}</label>
+            <label className="font-weight-bold">CUIL/CUIT:&nbsp;</label>
+            {cliente.cuilORcuit}
           </div>
           <div>
-            <label>Domicilio: {cliente.domicilio}</label>
+            <label className="font-weight-bold">Fecha de nacimiento:&nbsp;</label>
+            {cliente.fechaDeNacimiento}
           </div>
           <div>
-            <label>Ciudad: {cliente.ciudad}</label>
+            <label className="font-weight-bold">Sexo:&nbsp;</label>
+            {cliente.sexo}
           </div>
           <div>
-            <label>Provincia: {cliente.provincia}</label>
+            <label className="font-weight-bold">Nivel discapacidad visual:&nbsp;</label>
+            {cliente.nivelDiscapacidadVisual}
           </div>
           <div>
-            <label>Teléfono Fijo: {cliente.telefonoFijo}</label>
+            <label className="font-weight-bold">Domicilio:&nbsp;</label>
+            {cliente.domicilio}
           </div>
           <div>
-            <label>Teléfono Movil: {cliente.telefonoMovil}</label>
+            <label className="font-weight-bold">Ciudad:&nbsp;</label>
+            {cliente.ciudad}
           </div>
           <div>
-            <label>eMail: {cliente.correoElectronico}</label>
+            <label className="font-weight-bold">Provincia:&nbsp;</label>
+            {cliente.provincia}
           </div>
           <div>
-            <label>Fecha de nacimiento: {cliente.fechaDeNacimiento}</label>
+            <label className="font-weight-bold">Teléfono Fijo:&nbsp;</label>
+            {cliente.telefonoFijo}
           </div>
           <div>
-            <label>Sexo: {cliente.sexo}</label>
+            <label className="font-weight-bold">Teléfono Movil:&nbsp;</label>
+            {cliente.telefonoMovil}
           </div>
           <div>
-            <label>
-              Nivel discapacidad visual: {cliente.nivelDiscapacidadVisual}
-            </label>
+            <label className="font-weight-bold">eMail:&nbsp;</label>
+            {cliente.correoElectronico}
           </div>
         </Container>
       </fieldset>
