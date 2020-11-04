@@ -27,8 +27,13 @@ async function getLibros(titulo) {
   return libros;
 }
 
-async function getHojaDeRuta(idLibro,) {
+async function getHojaDeRuta(idLibro) {
   const { data: hojaDeRuta } = await axios.get("api/hojaderuta/libro/" + idLibro, __getToken());
+  return hojaDeRuta;
+}
+
+async function getHojaDeRutaPorTituloDelLibro(tituloLibro) {
+  const { data: hojaDeRuta } = await axios.get("api/hojaderuta/libro?titulo=" + tituloLibro, __getToken());
   return hojaDeRuta;
 }
 
@@ -84,4 +89,5 @@ export {
   getDashboard,
   agregarIteracionParaHojaDeRuta,
   login,
+  getHojaDeRutaPorTituloDelLibro,
 };

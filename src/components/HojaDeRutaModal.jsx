@@ -2,17 +2,13 @@ import React, {useEffect, useState} from "react";
 import {Row, Table} from "react-bootstrap";
 import "../css/hojaDeRuta.css"
 import NuevaIteracion from "./FormularioNuevaIteracion"
-import {getHojaDeRuta} from "./Api";
 
-export default function HojaDeRutaModal({libro}) {
+export default function HojaDeRutaModal({hoja}) {
     const [hojaDeRuta, setHojaDeRuta] = useState();
 
     useEffect(() => {
-        console.log("hola")
-        getHojaDeRuta(libro.id).then((unaHojaDeRuta) => {
-            setHojaDeRuta(unaHojaDeRuta);
-        });
-    }, [libro   ]);
+            setHojaDeRuta(hoja);
+    }, [hoja]);
 
     function mostrarIteraciones() {
         return (<div>
