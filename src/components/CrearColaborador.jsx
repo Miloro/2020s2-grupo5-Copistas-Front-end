@@ -1,12 +1,17 @@
 import React, {Fragment,useState} from "react"
 import { Container } from "react-bootstrap";
-import { Form,  Button} from "react-bootstrap";
+import { Form,  Button,InputGroup} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import {crearColaborador} from "./Api"
 
 export default function CrearColaborador({}){
+
     let history = useHistory();
+
+
+    const [validated, setValidated] = useState(false);
+
 
 
     const [colaborador,setColaborador]= useState({
@@ -29,12 +34,20 @@ export default function CrearColaborador({}){
         setRepetirContraseña(event.target.value)
     }
 
-    const crearUsuarioAdministrador = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }else{
+
         crearColaborador(colaborador).then((res)=>{
             history.push("/home")
-        })
-        
+        })   
     }
+    setValidated(true); 
+  };
 
 
 return(
@@ -42,38 +55,76 @@ return(
         <NavBar/>
         <Container id="hojaderuta" >
             <h2>Crear Colaborador</h2>
-            <Form noValidate>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Row >
-                    <label>Nombre</label>
-                    <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange}
-                     name="nombre"/>
+                    <InputForm
+                                    label="Nombre"
+                                    name="nombre"
+                                    value={colaborador.nombre}
+                                    onChange={handleInputChange}
+                                    required
+                    />
                 </Form.Row>
                 <Form.Row >
-                    <label>Nombre de Usuario</label>
-                    <input type="text" placeholder="Nombre de Usuario" className="form-control" onChange={handleInputChange}
-                     name="nombreUsuario"/>
+                    <InputForm
+                                    label="Nombre de Usuario"
+                                    name="nombreUsuario"
+                                    value={colaborador.nombreUsuario}
+                                    onChange={handleInputChange}
+                                    required
+                    />
                 </Form.Row>
                 <Form.Row >
-                    <label>Email</label>
-                    <input type="text" placeholder="Email" className="form-control" onChange={handleInputChange}
-                     name="email"/>
+                    <InputForm
+                                    label="Email"
+                                    name="email"
+                                    value={colaborador.email}
+                                    onChange={handleInputChange}
+                                    required
+                    />
                 </Form.Row>
                 <Form.Row >
-                    <label>Contraseña</label>
-                    <input type="text" placeholder="Contraseña" className="form-control" onChange={handleInputChange}
-                     name="password"/>
+                    <InputForm
+                                    label="Contraseña"
+                                    name="password"
+                                    value={colaborador.password}
+                                    onChange={handleInputChange}
+                                    required
+                    />
                 </Form.Row> 
                 <Form.Row >
-                    <label>Repetir Contraseña</label>
-                    <input type="text" placeholder="Repetir Contraseña" className="form-control" onChange={handleRepetirContraseña}
-                     name="passwordRepetido"/>
+                    <InputForm
+                                    label="Repetir Contraseña"
+                                    name="passwordRepetido"
+                                    value={contraseñaRepetida}
+                                    onChange={handleRepetirContraseña}
+                                    required
+                    />
                 </Form.Row>
-                <Button className="mt-3" block bsSize="large" onClick= {crearUsuarioAdministrador}>
+                <Button type="submit"  >
                     Crear Colaborador
                 </Button>        
             </Form>
-  
         </Container>
     </Fragment>
 )
+}
+
+function InputForm({label, mensajeControlInvalid = "este parametro es obligatorio.", ...props}){
+    return(
+        <Form.Group>
+            <Form.Label>{label}</Form.Label>
+            <InputGroup>
+                <Form.Control
+                {...props}
+                type="text"
+                placeholder={label}
+                aria-describedby="inputGroupPrepend"
+                />
+                <Form.Control.Feedback type="invalid">
+                    {mensajeControlInvalid}
+                </Form.Control.Feedback>
+            </InputGroup>
+        </Form.Group>
+    )
 }
