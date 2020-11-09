@@ -41,7 +41,7 @@ export default function HojaDeRutaModal({hoja}) {
             <div id="hojaderuta" className={"container"}>
                 <Row>
                     <h1 className={"m-3"}>
-                        {hojaDeRuta.libro.titulo}
+                        {"Hoja de ruta de " + hojaDeRuta.libro.titulo}
                     </h1>
                 </Row>
                 {mostrarIteraciones()}
