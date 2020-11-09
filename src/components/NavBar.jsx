@@ -36,6 +36,7 @@ export default function NavBar() {
                     <LogoImg/>
                     <Nav className="mr-auto">
                         <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>
+                        <Nav.Link onClick={handleClick} name="/colaborador"  >Crear Colaborador</Nav.Link>
                         <Nav.Link onClick={handleClick} name="/graficos"  >Graficos</Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>

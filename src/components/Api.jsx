@@ -22,6 +22,20 @@ async function login(username, pass) {
   return usuario;
 }
 
+async function crearColaborador(colaborador) {
+
+  const body  = {
+    nombre: colaborador.nombre,
+    nombreUsuario : colaborador.nombreUsuario,
+    email : colaborador.email,
+    password : colaborador.password,
+    roles: []
+}
+  const res = await axios.post("auth/colaborador", body, __getToken() );
+
+  return res;
+ }
+
 async function getLibros(titulo) {
   const { data: libros } = await axios.get("api/libro?titulo=" + titulo, __getToken());
   return libros;
@@ -90,4 +104,5 @@ export {
   agregarIteracionParaHojaDeRuta,
   login,
   getHojaDeRutaPorTituloDelLibro,
+  crearColaborador,
 };

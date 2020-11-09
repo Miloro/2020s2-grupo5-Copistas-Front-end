@@ -7,7 +7,7 @@ export default function LogoImg(){
         return (
             <a href="/home" className="navbar-brand">
                 <img src={logo} width="30" height="30"
-                     className="d-inline-block align-top" alt=""/>
+                     className="rounded-circle mr-1 d-inline-block align-top" alt=""/>
                 Libraille
             </a>
         );

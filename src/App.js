@@ -10,6 +10,7 @@ import HojaDeRuta from "./components/HojaDeRuta";
 import Dashboards from "./components/Dashboards";
 import Login from "./components/Login";
 import Libro from "./components/Libro";
+import CrearColaborador from "./components/CrearColaborador"
 
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
                              component={Dashboards} soloAdministrador />
           <RutaAutenticada  path="/libro/:titulo"
                              component={Libro} soloAdministrador />
+          <RutaAutenticada  path="/colaborador"
+                             component={CrearColaborador} soloAdministrador />
           <Route path="/" exact component={Login} />
         </Switch>
       </BrowserRouter>
