@@ -44,7 +44,7 @@ export default function CrearColaborador({}){
 
         crearColaborador(colaborador).then((res)=>{
             history.push("/home")
-        })   
+        }).catch(e => alert("no se puede crear el usuario"));
     }
     setValidated(true); 
   };
@@ -57,7 +57,7 @@ return(
             <h2>Crear Colaborador</h2>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Row >
-                    <InputForm
+                <InputForm
                                     label="Nombre"
                                     name="nombre"
                                     value={colaborador.nombre}
@@ -98,6 +98,7 @@ return(
                                     name="passwordRepetido"
                                     value={contraseñaRepetida}
                                     onChange={handleRepetirContraseña}
+
                                     required
                     />
                 </Form.Row>
