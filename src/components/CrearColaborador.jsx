@@ -53,7 +53,7 @@ export default function CrearColaborador({}){
 return(
     <Fragment>
         <NavBar/>
-        <Container id="hojaderuta" >
+        <Container id="contenedor" >
             <h2>Crear Colaborador</h2>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Row >

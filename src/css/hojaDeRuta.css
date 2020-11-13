@@ -41,3 +41,14 @@ body {
 #hojaderuta h1 {
   color: #0f191f;
 }
+
+#contenedor {
+  background: #ffffff;
+  font-family: Roboto;
+  color: #0f191f;
+  border-radius: 1rem;
+}
+
+#contenedor h1 {
+  color: #0f191f;
+}

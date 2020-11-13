@@ -93,6 +93,14 @@ async function agregarIteracionParaHojaDeRuta(idHojaDeRuta, iteracion) {
   return res;
 }
 
+async function getAllLibros() {
+  const { data: libros } = await axios.get(
+    "api/libros",
+    __getToken()
+  );
+  return libros;
+}
+
 export {
   getLibros,
   getHojaDeRuta,
@@ -105,4 +113,5 @@ export {
   login,
   getHojaDeRutaPorTituloDelLibro,
   crearColaborador,
+  getAllLibros
 };

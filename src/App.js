@@ -11,6 +11,7 @@ import Dashboards from "./components/Dashboards";
 import Login from "./components/Login";
 import Libro from "./components/Libro";
 import CrearColaborador from "./components/CrearColaborador"
+import Libros from "./components/Libros"
 
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
                              component={Libro} soloAdministrador />
           <RutaAutenticada  path="/colaborador"
                              component={CrearColaborador} soloAdministrador />
+          <RutaAutenticada  path="/libros"
+                             component={Libros} soloAdministrador />
           <Route path="/" exact component={Login} />
         </Switch>
       </BrowserRouter>

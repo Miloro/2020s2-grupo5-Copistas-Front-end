@@ -46,6 +46,7 @@ export default function NavBar() {
                         <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>
                         <Nav.Link onClick={handleClick} name="/colaborador"  >Crear Colaborador</Nav.Link>
                         <Nav.Link onClick={handleClick} name="/graficos"  >Graficos</Nav.Link>
+                        <Nav.Link onClick={handleClick} name="/libros"  >Lista De Libros</Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>
                         <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
