@@ -11,25 +11,16 @@ describe('Form', () => {
   })
   
   
-
-
-  it('accepts input', () => {
-    cy.get('body')
-      .type("admin") 
-      .tab() 
-      .type('{end}')
-  })
-  
-  it('it focuses the input', () => {
-    cy.get('body').first().focus()
-  })
-
-  it('accepts input3', () => {
+  it('completes email and pass and goes to home page', () => {
     cy.get('body').within(() => {
       cy.get('input:first').type('admin')
-      cy.get('input:last').type('admin')
+      cy.get('input:last').type('admin')     
     })
+    cy.get('Button').click()
+    cy.url().should('eq', 'http://localhost:3000/home')
   })
+ 
+   
 
 
 })
