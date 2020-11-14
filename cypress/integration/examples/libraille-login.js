@@ -10,6 +10,9 @@ describe('Form', () => {
     cy.focused().should('have.class', 'form-control')
   })
   
+  
+
+
   it('accepts input', () => {
     cy.get('body')
       .type("admin") 
@@ -18,13 +21,14 @@ describe('Form', () => {
   })
   
   it('it focuses the input', () => {
-    cy.get('input').first().focus()
+    cy.get('body').first().focus()
   })
 
   it('accepts input3', () => {
-    const input = "Learn about Cypress"
-    cy.get('body')
-      .type("bar")
+    cy.get('body').within(() => {
+      cy.get('input:first').type('admin')
+      cy.get('input:last').type('admin')
+    })
   })
 
 
