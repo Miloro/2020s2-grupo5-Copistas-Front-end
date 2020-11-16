@@ -101,6 +101,15 @@ async function getAllLibros() {
   return libros;
 }
 
+async function editarLibro(lib, elemento, valor){
+  const body ={
+    ...lib,
+    [elemento] : valor,
+  }
+  const { data: libro } = await axios.put("api/libro/" + lib.id, body, __getToken())
+  return libro
+}
+
 export {
   getLibros,
   getHojaDeRuta,
@@ -113,5 +122,6 @@ export {
   login,
   getHojaDeRutaPorTituloDelLibro,
   crearColaborador,
-  getAllLibros
+  getAllLibros,
+  editarLibro
 };

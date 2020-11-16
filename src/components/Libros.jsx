@@ -1,6 +1,7 @@
+import { set } from "js-cookie";
 import React, { Fragment, useState, useEffect } from "react";
 import {Table,Container, Button, Modal} from 'react-bootstrap'
-import {getAllLibros} from './Api'
+import {getAllLibros, editarLibro} from './Api'
 
 import NavBar from "./NavBar";
 
@@ -10,26 +11,20 @@ export default function Libros () {
     const [libros, setLibros] = useState()
 
     useEffect(() => {
-        console.log(libros)
         getAllLibros().then(brs => {
             setLibros(brs)
         })
     },[]);
 
-    function verInfoLibro(libro){
-
-    }
-
     function listarLibros(){
-        console.log(libros)
-        return  (!!libros ? libros.map(libro => {
+        return  (!!libros ? libros.map((libro) => {
             return  <tr>
                         <td>{libro.titulo}</td>
                         <td>{libro.idioma}</td>
                         <td>{libro.retirado? "si" : "no"}</td>
                         <td>{libro.pagado? "si" : "no"}</td>
                         <td>
-                            <InfoLibroModal libro={libro}/>
+                            <InfoLibroModal  libro={libro}/>
                         </td>
 
                       </tr>
@@ -64,11 +59,28 @@ export default function Libros () {
     );
 }
 
-function InfoLibroModal({libro}) {
+function InfoLibroModal({libro,}) {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    function handleRetirarLibro(){
+
+        editarLibro(libro, "retirado", true).then(libro => {
+            window.location.reload();
+            handleClose()
+        }).catch(e=>(console.log(e)))
+    };
+
+    function handlePagarLibro(){
+
+        editarLibro(libro, "pagado", true).then(libro => {
+            window.location.reload();
+            handleClose()
+        }).catch(e=>(console.log(e)))
+    };
+
   
     return (
       <>
@@ -107,6 +119,12 @@ function InfoLibroModal({libro}) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
+            <Button variant="success" onClick={handleRetirarLibro}>
+              Retirar
+            </Button>
+            <Button variant="success" onClick={handlePagarLibro}>
+              Pagar
+            </Button>
             <Button variant="secondary" onClick={handleClose}>
               Cerrar
             </Button>
