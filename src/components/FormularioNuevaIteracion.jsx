@@ -25,7 +25,9 @@ export default function NuevaIteracion({idHojaDeRuta}) {
       fechaAsignacion: formatoDia(startDate),
       tareaAsignada: estadoDeIteracion,
     };
-    agregarIteracionParaHojaDeRuta(idHojaDeRuta, instancia);
+    agregarIteracionParaHojaDeRuta(idHojaDeRuta, instancia).catch(e => {
+      alert(e.response.data.mensaje)
+    });
   };
 
   return (
