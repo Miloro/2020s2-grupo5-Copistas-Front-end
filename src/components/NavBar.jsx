@@ -34,19 +34,27 @@ export default function NavBar() {
         history.push("/");
     }
 
-
+    
     return (
         <UsuarioContext.Consumer>
-        {context =>  {return( 
+        {context =>  {
+            return( 
             <Fragment>
                 
                 <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary m-3 " variant="dark">
                     <LogoImg/>
                     <Nav className="mr-auto">
-                        <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>
-                        <Nav.Link onClick={handleClick} name="/colaborador"  >Crear Colaborador</Nav.Link>
-                        <Nav.Link onClick={handleClick} name="/graficos"  >Graficos</Nav.Link>
-                        <Nav.Link onClick={handleClick} name="/libros"  >Lista De Libros</Nav.Link>
+
+                        {context.usuario.esAdministrador()?
+                            <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>:
+                        null}
+
+                        {context.usuario.esAdministrador()?
+                            <Nav.Link onClick={handleClick} name="/colaborador">Crear Colaborador</Nav.Link>:
+                        null}
+
+                        <Nav.Link onClick={handleClick} name="/graficos">Graficos</Nav.Link>
+                        <Nav.Link onClick={handleClick} name="/libros">Lista De Libros</Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>
                         <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
@@ -62,5 +70,6 @@ export default function NavBar() {
 
         </UsuarioContext.Consumer>
     );
+    
 }
 

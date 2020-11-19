@@ -2,6 +2,8 @@ import { set } from "js-cookie";
 import React, { Fragment, useState, useEffect } from "react";
 import {Table,Container, Button, Modal} from 'react-bootstrap'
 import {getAllLibros, editarLibro} from './Api'
+import UsuarioContext from './UsuarioContext';
+
 
 import NavBar from "./NavBar";
 
@@ -81,55 +83,62 @@ function InfoLibroModal({libro,}) {
         }).catch(e=>(console.log(e)))
     };
 
-  
     return (
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          INFO
-        </Button>
-  
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>{libro.titulo}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <label className="font-weight-bold">Nombre de autor:&nbsp;</label>
-                    {libro.nombreAutor}
-                </div>
-                <div>
-                    <label className="font-weight-bold">Apellido del autor:&nbsp;</label>
-                    {libro.apellidoAutor}
-                </div>
-                <div>
-                    <label className="font-weight-bold">Editorial:&nbsp;</label>
-                    {libro.editorial}
-                </div>
-                <div>
-                    <label className="font-weight-bold">Edicion:&nbsp;</label>
-                    {libro.edicion}
-                </div>
-                <div>
-                    <label className="font-weight-bold">Idioma:&nbsp;</label>
-                    {libro.idioma}
-                </div>
-                <div>
-                    <label className="font-weight-bold">Categoria:&nbsp;</label>
-                    {libro.categoria}
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="success" onClick={handleRetirarLibro}>
-              Retirar
-            </Button>
-            <Button variant="success" onClick={handlePagarLibro}>
-              Pagar
-            </Button>
-            <Button variant="secondary" onClick={handleClose}>
-              Cerrar
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+        <UsuarioContext.Consumer>{
+            context =>  {
+                return(
+                    <>
+                    <Button variant="primary" onClick={handleShow}>
+                      INFO
+                    </Button>
+              
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{libro.titulo}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div>
+                                <label className="font-weight-bold">Nombre de autor:&nbsp;</label>
+                                {libro.nombreAutor}
+                            </div>
+                            <div>
+                                <label className="font-weight-bold">Apellido del autor:&nbsp;</label>
+                                {libro.apellidoAutor}
+                            </div>
+                            <div>
+                                <label className="font-weight-bold">Editorial:&nbsp;</label>
+                                {libro.editorial}
+                            </div>
+                            <div>
+                                <label className="font-weight-bold">Edicion:&nbsp;</label>
+                                {libro.edicion}
+                            </div>
+                            <div>
+                                <label className="font-weight-bold">Idioma:&nbsp;</label>
+                                {libro.idioma}
+                            </div>
+                            <div>
+                                <label className="font-weight-bold">Categoria:&nbsp;</label>
+                                {libro.categoria}
+                            </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        {context.usuario.esAdministrador()?
+                            <Button variant="success" onClick={handleRetirarLibro}>Retirar</Button>:
+                        null}
+                        {context.usuario.esAdministrador()?
+                            <Button variant="success" onClick={handlePagarLibro}>Pagar</Button>:
+                        null}
+                        <Button variant="secondary" onClick={handleClose}>
+                          Cerrar
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                    
+                )
+            }
+        }
+        </UsuarioContext.Consumer>
     );
   }

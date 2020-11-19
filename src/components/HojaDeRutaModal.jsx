@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Row, Table} from "react-bootstrap";
 import "../css/hojaDeRuta.css"
 import NuevaIteracion from "./FormularioNuevaIteracion"
+import UsuarioContext from './UsuarioContext';
 
 export default function HojaDeRutaModal({hoja}) {
     const [hojaDeRuta, setHojaDeRuta] = useState();
@@ -38,15 +39,27 @@ export default function HojaDeRutaModal({hoja}) {
 
     function mostrarData() {
         return (
-            <div id="hojaderuta" className={"container"}>
-                <Row>
-                    <h1 className={"m-3"}>
-                        {"Hoja de ruta de " + hojaDeRuta.libro.titulo}
-                    </h1>
-                </Row>
-                {mostrarIteraciones()}
-                <NuevaIteracion idHojaDeRuta={hojaDeRuta.id}/>
-            </div>
+            <UsuarioContext.Consumer>{
+                context =>  {
+                    return(
+                    <div id="hojaderuta" className={"container"}>
+                        <Row>
+                            <h1 className={"m-3"}>
+                                {"Hoja de ruta de " + hojaDeRuta.libro.titulo}
+                            </h1>
+                        </Row>
+                        {mostrarIteraciones()}
+                        {context.usuario.esAdministrador()?
+                            <NuevaIteracion idHojaDeRuta={hojaDeRuta.id}/>:
+                            null
+                        }
+                        
+                    </div>
+                        
+                    )
+                }
+            }
+            </UsuarioContext.Consumer>
         );
     }
 

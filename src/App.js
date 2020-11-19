@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import UsuarioContext from './components/UsuarioContext';
@@ -13,22 +13,36 @@ import Libro from "./components/Libro";
 import CrearColaborador from "./components/CrearColaborador"
 import Libros from "./components/Libros"
 
+import Usuario from "./modelos/usuario"
 
-function App() {
+
+function App(props) {
 
   const [usuario, setUsuario] = useState({})
   const [sesion, setSesion] = useState(obtenerSession());
   const [estaLogueado, setEstaLogueado] = useState(!!sesion);
 
+  useEffect(() => {
+    if(estaLogueado){
+      setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities))
+    }else{
+      setEstaLogueado(false)
+      setUsuario({})
+    }
+  }, [sesion]);
+
+
   const iniciarSesion = (sesion) => {
+
     guardarSession(sesion);
     setEstaLogueado(true) 
-    setUsuario(sesion);
+    setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities));
   }
 
   const cerrarSesion = () => {
     eliminarSession();
     setEstaLogueado(false)
+    setSesion({})
     setUsuario({})
 
   }
@@ -38,17 +52,17 @@ function App() {
       <BrowserRouter>
         <Switch>
           <RutaAutenticada exact path="/home"
-                             component={Home} soloAdministrador />
+                             component={Home} />
           <RutaAutenticada  path="/hojaDeRuta"
-                             component={HojaDeRuta} soloAdministrador />
+                             component={HojaDeRuta} soloAdministrador/>
           <RutaAutenticada  path="/graficos"
-                             component={Dashboards} soloAdministrador />
+                             component={Dashboards}  />
           <RutaAutenticada  path="/libro/:titulo"
-                             component={Libro} soloAdministrador />
+                             component={Libro} />
           <RutaAutenticada  path="/colaborador"
                              component={CrearColaborador} soloAdministrador />
           <RutaAutenticada  path="/libros"
-                             component={Libros} soloAdministrador />
+                             component={Libros}  />
           <Route path="/" exact component={Login} />
         </Switch>
       </BrowserRouter>
