@@ -49,7 +49,7 @@ export default function HojaDeRutaModal({hoja}) {
                             </h1>
                         </Row>
                         {mostrarIteraciones()}
-                        {context.usuario.esAdministrador()?
+                        {!!context.usuario.rol && context.usuario.esAdministrador()?
                             <NuevaIteracion idHojaDeRuta={hojaDeRuta.id}/>:
                             null
                         }

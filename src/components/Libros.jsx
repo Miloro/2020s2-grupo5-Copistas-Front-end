@@ -123,10 +123,10 @@ function InfoLibroModal({libro,}) {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                        {context.usuario.esAdministrador()?
+                        {!!context.usuario.rol && context.usuario.esAdministrador()?
                             <Button variant="success" onClick={handleRetirarLibro}>Retirar</Button>:
                         null}
-                        {context.usuario.esAdministrador()?
+                        {!!context.usuario.rol && context.usuario.esAdministrador()?
                             <Button variant="success" onClick={handlePagarLibro}>Pagar</Button>:
                         null}
                         <Button variant="secondary" onClick={handleClose}>

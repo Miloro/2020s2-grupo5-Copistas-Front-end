@@ -1,5 +1,5 @@
 import React, {Fragment,useState} from "react";
-import {Navbar, Nav, Form, FormControl, Button,Dropdown,DropdownButton} from 'react-bootstrap'
+import {Navbar, Nav, Form, FormControl, Button,Dropdown,DropdownButton, Badge} from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
 import UsuarioContext from './UsuarioContext';
 import { obtenerSession } from '../sesion';
@@ -43,25 +43,27 @@ export default function NavBar() {
                 
                 <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary m-3 " variant="dark">
                     <LogoImg/>
-                    <Nav className="mr-auto">
+                    <Nav className="mr-auto"> 
 
-                        {context.usuario.esAdministrador()?
+                        {!!context.usuario.rol && context.usuario.esAdministrador()?
                             <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>:
                         null}
 
-                        {context.usuario.esAdministrador()?
+                        {!!context.usuario.rol && context.usuario.esAdministrador()?
                             <Nav.Link onClick={handleClick} name="/colaborador">Crear Colaborador</Nav.Link>:
                         null}
 
                         <Nav.Link onClick={handleClick} name="/graficos">Graficos</Nav.Link>
                         <Nav.Link onClick={handleClick} name="/libros">Lista De Libros</Nav.Link>
+                        <Nav.Link onClick={handleClick} name="/libros">Tareas Pendientes </Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>
                         <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
                         <Button onClick={buscarLibro} variant="outline-light">Buscar</Button>
                     </Form>
-                    <DropdownButton className="ml-3" variant="success" id="dropdown-basic" title={nombreDeUsuario()}>
-                         <Dropdown.Item onClick={()=>{salir(context)}}>Salir</Dropdown.Item>
+                    <DropdownButton drop={"left"} className="ml-3" variant="success" id="dropdown-basic" title={nombreDeUsuario() } >
+                        <Dropdown.Item onClick={()=>{salir(context)}}>Tareas Pendiente <Badge variant="danger">9</Badge> </Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{salir(context)}}>Salir</Dropdown.Item>
                     </DropdownButton>
                 </Navbar>
             </Fragment>
