@@ -1,7 +1,8 @@
 export default class Usuario {
-    constructor( nombre, roles ) {
+    constructor( nombre, roles, tareas ) {
       this.nombre = nombre;
       this.rol = roles;
+      this.tareasPendientes = tareas;
     }
   
     esAdministrador() {
@@ -9,6 +10,10 @@ export default class Usuario {
     };
   
     esColaborador() {
-        return this.rol.some(e => e.authority === "ROLE_USER");
+      return this.rol.some(e => e.authority === "ROLE_USER");
+    }
+
+    cantidadDeTareasPendientes(){
+      return  this.tareasPendientes.length
     }
   };

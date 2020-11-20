@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Libro from "./components/Libro";
 import CrearColaborador from "./components/CrearColaborador"
 import Libros from "./components/Libros"
+import {tareasPendientesPara} from "./components/Api"
 
 import Usuario from "./modelos/usuario"
 
@@ -24,7 +25,11 @@ function App(props) {
 
   useEffect(() => {
     if(estaLogueado){
-      setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities))
+      tareasPendientesPara(sesion.data.nombreUsuario).then((tareas) =>{
+            setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities,tareas))
+        }
+      )
+      
     }else{
       setEstaLogueado(false)
       setUsuario({})
@@ -36,7 +41,10 @@ function App(props) {
 
     guardarSession(sesion);
     setEstaLogueado(true) 
-    setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities));
+    tareasPendientesPara(sesion.data.nombreUsuario).then((tareas) =>{
+      setUsuario(new Usuario(sesion.data.nombreUsuario, sesion.data.authorities,tareas))
+    }
+  )
   }
 
   const cerrarSesion = () => {

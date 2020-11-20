@@ -12,7 +12,7 @@ export default function Login() {
 
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [password, setPassword] = useState("");
-    const [usuario, setUsuario] = useState();
+
   
     function validateForm() {
       return nombreUsuario.length > 0 && password.length > 0;
@@ -20,10 +20,8 @@ export default function Login() {
   
     function handleSubmit(event,context) {
         event.preventDefault();
-        console.log(context)
         login(nombreUsuario, password).then((user) => {
             context.iniciarSesion(user)
-            setUsuario(user);
             history.push("/home")
         }).catch(e => alert("usuario incorrecto"));
 

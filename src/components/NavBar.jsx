@@ -10,7 +10,6 @@ export default function NavBar() {
     
     function nombreDeUsuario(){
         return obtenerSession().data.nombreUsuario;
-
     }
 
 
@@ -46,23 +45,25 @@ export default function NavBar() {
                     <Nav className="mr-auto"> 
 
                         {!!context.usuario.rol && context.usuario.esAdministrador()?
-                            <Nav.Link onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>:
+                            <Nav.Link className="text-light" onClick={handleClick} name="/hojaderuta">Crear Hoja De Ruta</Nav.Link>:
                         null}
 
                         {!!context.usuario.rol && context.usuario.esAdministrador()?
-                            <Nav.Link onClick={handleClick} name="/colaborador">Crear Colaborador</Nav.Link>:
+                            <Nav.Link className="text-light" onClick={handleClick} name="/colaborador">Crear Colaborador</Nav.Link>:
                         null}
 
-                        <Nav.Link onClick={handleClick} name="/graficos">Graficos</Nav.Link>
-                        <Nav.Link onClick={handleClick} name="/libros">Lista De Libros</Nav.Link>
-                        <Nav.Link onClick={handleClick} name="/libros">Tareas Pendientes </Nav.Link>
+                        <Nav.Link className="text-light" onClick={handleClick} name="/graficos">Graficos</Nav.Link>
+                        <Nav.Link className="text-light" onClick={handleClick} name="/libros">Lista De Libros</Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>
                         <FormControl onChange={cambioTituloABuscar} value={tituloABuscar} type="text" placeholder="Nombre De Libro a Buscar" className="mr-sm-2"/>
                         <Button onClick={buscarLibro} variant="outline-light">Buscar</Button>
                     </Form>
-                    <DropdownButton drop={"left"} className="ml-3" variant="success" id="dropdown-basic" title={nombreDeUsuario() } >
-                        <Dropdown.Item onClick={()=>{salir(context)}}>Tareas Pendiente <Badge variant="danger">9</Badge> </Dropdown.Item>
+                    {!!context.usuario.rol && context.usuario.esColaborador()?
+                        <Nav.Link className="text-light" onClick={handleClick} name="/libros">Tareas<Badge variant="danger">{context.usuario.cantidadDeTareasPendientes()}</Badge>  </Nav.Link>:
+                    null}
+
+                    <DropdownButton className="ml-2" variant="success" id="dropdown-basic" title={nombreDeUsuario() } >
                         <Dropdown.Item onClick={()=>{salir(context)}}>Salir</Dropdown.Item>
                     </DropdownButton>
                 </Navbar>

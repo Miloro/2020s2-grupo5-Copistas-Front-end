@@ -110,6 +110,12 @@ async function editarLibro(lib, elemento, valor){
   return libro
 }
 
+async function tareasPendientesPara(nombreUsuario){
+
+  const { data: tareas } = await axios.get("/api/hojaderuta/historial/colaborador?usuario=" + nombreUsuario, __getToken())
+  return tareas
+}
+
 export {
   getLibros,
   getHojaDeRuta,
@@ -123,5 +129,6 @@ export {
   getHojaDeRutaPorTituloDelLibro,
   crearColaborador,
   getAllLibros,
-  editarLibro
+  editarLibro,
+  tareasPendientesPara
 };

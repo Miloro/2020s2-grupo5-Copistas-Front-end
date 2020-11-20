@@ -55,7 +55,7 @@ export default function DatosDelLibro({libroId}) {
                 libroId={libroId}
             />
 
-            <fieldset id={"contenedor"}>
+            <fieldset id="contenedorAzul">
                 <Container className={"m-3"}>
                     <div className="tituloConBoton">
                         <h4> Libro </h4>

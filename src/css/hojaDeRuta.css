@@ -3,12 +3,6 @@
   margin-top: 1rem;
 }
 
-#contenedor {
-  background: #212936;
-  font-family: Roboto;
-  color: #afbdd1;
-}
-
 .botonHojaDeRuta {
   margin: 3rem;
 }
@@ -51,4 +45,10 @@ body {
 
 #contenedor h1 {
   color: #0f191f;
+}
+
+#contenedorAzul {
+  background: #212936;
+  font-family: Roboto;
+  color: #afbdd1;
 }
