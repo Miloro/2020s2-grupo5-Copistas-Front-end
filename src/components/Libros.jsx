@@ -29,7 +29,7 @@ export default function Libros () {
                             <InfoLibroModal  libro={libro}/>
                         </td>
 
-                      </tr>
+                    </tr>
         }): "buscando")
 
     }
@@ -38,7 +38,7 @@ export default function Libros () {
       <Fragment>
         <NavBar />
         
-        <Container id="contenedor" >
+        <Container className="p-3" id="contenedor" >
             
         <h1>Lista De Libros</h1>
         <Table striped bordered hover size="sm">

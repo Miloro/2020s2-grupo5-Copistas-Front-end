@@ -60,7 +60,7 @@ export default function NavBar() {
                         <Button onClick={buscarLibro} variant="outline-light">Buscar</Button>
                     </Form>
                     {!!context.usuario.rol && context.usuario.esColaborador()?
-                        <Nav.Link className="text-light" onClick={handleClick} name="/libros">Tareas<Badge variant="danger">{context.usuario.cantidadDeTareasPendientes()}</Badge>  </Nav.Link>:
+                        <Nav.Link className="text-light" onClick={handleClick} name="/tareas">Tareas<Badge variant="danger">{context.usuario.cantidadDeTareasPendientes()}</Badge>  </Nav.Link>:
                     null}
 
                     <DropdownButton className="ml-2" variant="success" id="dropdown-basic" title={nombreDeUsuario() } >

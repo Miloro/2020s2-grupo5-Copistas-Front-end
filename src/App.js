@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Libro from "./components/Libro";
 import CrearColaborador from "./components/CrearColaborador"
 import Libros from "./components/Libros"
+import Tareas from "./components/Tareas"
 import {tareasPendientesPara} from "./components/Api"
 
 import Usuario from "./modelos/usuario"
@@ -71,6 +72,8 @@ function App(props) {
                              component={CrearColaborador} soloAdministrador />
           <RutaAutenticada  path="/libros"
                              component={Libros}  />
+          <RutaAutenticada  path="/tareas"
+                             component={Tareas}  />
           <Route path="/" exact component={Login} />
         </Switch>
       </BrowserRouter>
