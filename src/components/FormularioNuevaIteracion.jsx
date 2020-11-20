@@ -61,6 +61,9 @@ export default function NuevaIteracion({idHojaDeRuta}) {
           </Form.Control>
           </Col>
           <Col>
+          </Col>
+          <Col> 
+            <br/>
             <Button variant="primary" onClick={enviarDatos}>
               Crear tarea
             </Button>
