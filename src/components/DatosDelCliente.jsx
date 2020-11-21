@@ -67,7 +67,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
         setClienteId={setClienteId}
       />
 
-      <fieldset id={"contenedor"}>
+      <fieldset id="contenedorAzul">
         <Container className={"m-3"}>
           <div className="tituloConBoton">
             <h4>{titulo}</h4>

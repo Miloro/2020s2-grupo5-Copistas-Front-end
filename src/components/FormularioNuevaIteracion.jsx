@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import { Form,  Button,  Col,  } from "react-bootstrap";
 import { agregarIteracionParaHojaDeRuta } from "./Api";
 
@@ -26,7 +25,12 @@ export default function NuevaIteracion({idHojaDeRuta}) {
       fechaAsignacion: formatoDia(startDate),
       tareaAsignada: estadoDeIteracion,
     };
-    agregarIteracionParaHojaDeRuta(idHojaDeRuta, instancia);
+    agregarIteracionParaHojaDeRuta(idHojaDeRuta, instancia).then(()=>{
+        //refactor
+        window.location.reload();
+    }).catch(e => {
+      alert(e.response.data.mensaje)
+    });
   };
 
   return (
@@ -60,6 +64,9 @@ export default function NuevaIteracion({idHojaDeRuta}) {
           </Form.Control>
           </Col>
           <Col>
+          </Col>
+          <Col> 
+            <br/>
             <Button variant="primary" onClick={enviarDatos}>
               Crear tarea
             </Button>

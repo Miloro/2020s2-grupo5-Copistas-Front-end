@@ -4,6 +4,7 @@ import {login} from "./Api";
 import "../css/Login.css";
 import UsuarioContext from "./UsuarioContext"
 import { useHistory } from "react-router-dom";
+import logo from "../images/logo_copistas1.png";
 
 export default function Login() {
 
@@ -11,7 +12,7 @@ export default function Login() {
 
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [password, setPassword] = useState("");
-    const [usuario, setUsuario] = useState();
+
   
     function validateForm() {
       return nombreUsuario.length > 0 && password.length > 0;
@@ -19,10 +20,8 @@ export default function Login() {
   
     function handleSubmit(event,context) {
         event.preventDefault();
-        console.log(context)
         login(nombreUsuario, password).then((user) => {
             context.iniciarSesion(user)
-            setUsuario(user);
             history.push("/home")
         }).catch(e => alert("usuario incorrecto"));
 
@@ -32,10 +31,12 @@ export default function Login() {
         <UsuarioContext.Consumer>
             {context =>{
               return <Fragment> 
-            <div class="container">
+        <div class="container">
             <div class="row h-100 justify-content-center">
                 <div className="Login">
                 <form onSubmit={event => {handleSubmit(event, context)}} >
+                    <h2 id= "titulo" className= "font-weight-bold text-center mb-4">BIENVENIDÓ</h2>
+                    <img src={logo} width="200" height="200" className="rounded-circle mx-auto d-block shadow mb-2 bg-white" alt=""/>
                     <FormGroup controlId="nombreUsuario" bsSize="large">
                     <Form.Label>Usuario</Form.Label>
                     <FormControl
