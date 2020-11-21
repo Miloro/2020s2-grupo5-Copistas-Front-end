@@ -111,9 +111,13 @@ async function editarLibro(lib, elemento, valor){
 }
 
 async function tareasPendientesPara(nombreUsuario){
-
   const { data: tareas } = await axios.get("/api/hojaderuta/historial/colaborador?usuario=" + nombreUsuario, __getToken())
   return tareas
+}
+
+async function marcarTareaComoTerminada(idTarea){
+  const res = await axios.put("api/iteracion/completar/" + idTarea,{}, __getToken())
+  return res
 }
 
 export {
@@ -130,5 +134,6 @@ export {
   crearColaborador,
   getAllLibros,
   editarLibro,
-  tareasPendientesPara
+  tareasPendientesPara,
+  marcarTareaComoTerminada
 };

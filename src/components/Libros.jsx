@@ -70,6 +70,7 @@ function InfoLibroModal({libro,}) {
     function handleRetirarLibro(){
 
         editarLibro(libro, "retirado", true).then(libro => {
+            //refactor
             window.location.reload();
             handleClose()
         }).catch(e=>(console.log(e)))
@@ -78,6 +79,7 @@ function InfoLibroModal({libro,}) {
     function handlePagarLibro(){
 
         editarLibro(libro, "pagado", true).then(libro => {
+            //refactor
             window.location.reload();
             handleClose()
         }).catch(e=>(console.log(e)))
