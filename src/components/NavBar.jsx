@@ -52,7 +52,7 @@ export default function NavBar() {
                             <Nav.Link className="text-light" onClick={handleClick} name="/colaborador">Crear Colaborador</Nav.Link>:
                         null}
 
-                        <Nav.Link className="text-light" onClick={handleClick} name="/graficos">Graficos</Nav.Link>
+                        <Nav.Link className="text-light" onClick={handleClick} name="/graficos">Estadisticas</Nav.Link>
                         <Nav.Link className="text-light" onClick={handleClick} name="/libros">Lista De Libros</Nav.Link>
                     </Nav>
                     <Form inline onSubmit={buscarLibro}>
