@@ -8,6 +8,7 @@ export default function CrearClienteModal({
                                               cerrarModal,
                                               actualizarCliente,
                                               setClienteId,
+                                              titulo,
                                           }) {
     const [cliente, setCliente] = useState({
         id: "",
@@ -64,7 +65,7 @@ export default function CrearClienteModal({
     return (
         <Modal show={abierto} onHide={cerrarModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
-                <Modal.Title>Crear Cliente</Modal.Title>
+                <Modal.Title>Crear {titulo}</Modal.Title>
             </Modal.Header>
         <Modal.Body>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
