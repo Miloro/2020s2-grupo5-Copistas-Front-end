@@ -55,13 +55,14 @@ return(
         <NavBar/>
         <Container className="p-3" id="contenedor" >
             <h2>Crear Colaborador</h2>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form autoComplete="off" noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Row >
                 <InputForm
                                     label="Nombre"
                                     name="nombre"
                                     value={colaborador.nombre}
                                     onChange={handleInputChange}
+                                    type="text"
                                     required
                     />
                 </Form.Row>
@@ -71,6 +72,7 @@ return(
                                     name="nombreUsuario"
                                     value={colaborador.nombreUsuario}
                                     onChange={handleInputChange}
+                                    type="text"
                                     required
                     />
                 </Form.Row>
@@ -80,6 +82,7 @@ return(
                                     name="email"
                                     value={colaborador.email}
                                     onChange={handleInputChange}
+                                    type="email"
                                     required
                     />
                 </Form.Row>
@@ -89,6 +92,7 @@ return(
                                     name="password"
                                     value={colaborador.password}
                                     onChange={handleInputChange}
+                                    type="password"
                                     required
                     />
                 </Form.Row> 
@@ -98,7 +102,7 @@ return(
                                     name="passwordRepetido"
                                     value={contraseñaRepetida}
                                     onChange={handleRepetirContraseña}
-
+                                    type="password"
                                     required
                     />
                 </Form.Row>
@@ -115,10 +119,10 @@ function InputForm({label, mensajeControlInvalid = "este parametro es obligatori
     return(
         <Form.Group>
             <Form.Label>{label}</Form.Label>
-            <InputGroup>
+            <InputGroup >
                 <Form.Control
+                AutoComplete="new-password"
                 {...props}
-                type="text"
                 placeholder={label}
                 aria-describedby="inputGroupPrepend"
                 />

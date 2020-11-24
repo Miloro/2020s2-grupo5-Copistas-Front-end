@@ -35,7 +35,7 @@ export default function Login() {
             <div class="row h-100 justify-content-center">
                 <div className="Login">
                 <form onSubmit={event => {handleSubmit(event, context)}} >
-                    <h2 id= "titulo" className= "font-weight-bold text-center mb-4">BIENVENIDÓ</h2>
+                    <h2 id= "titulo" className= "font-weight-bold text-center mb-4">BIENVENIDO</h2>
                     <img src={logo} width="200" height="200" className="rounded-circle mx-auto d-block shadow mb-2 bg-white" alt=""/>
                     <FormGroup controlId="nombreUsuario" bsSize="large">
                     <Form.Label>Usuario</Form.Label>
