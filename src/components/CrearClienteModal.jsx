@@ -72,7 +72,7 @@ export default function CrearClienteModal({
                 <Form.Row xs={1} md={4}>
                         <Col>
                             <InputForm
-                                label="Nombre"
+                                label="Nombre*"
                                 name="nombre"
                                 value={cliente.nombre}
                                 onChange={handleInputChange}
@@ -81,7 +81,7 @@ export default function CrearClienteModal({
                         </Col>
                         <Col >
                             <InputForm
-                                label="Apellido"
+                                label="Apellido*"
                                 name="apellido"
                                 value={cliente.apellido}
                                 onChange={handleInputChange}
@@ -91,7 +91,7 @@ export default function CrearClienteModal({
                         <Col >
                             <InputForm
                                 type="number"
-                                label="DNI"
+                                label="DNI*"
                                 name="dni"
                                 value={cliente.dni}
                                 onChange={handleInputNumberChange}
