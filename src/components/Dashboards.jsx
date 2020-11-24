@@ -15,6 +15,7 @@ export default function Dashboards() {
   return (
     <div>
       <NavBar/>
+      <h1 className = "m-3">ESTADISTICAS LIBRAILLE</h1>
       <div className="d-flex flex-row bd-highlight mb-3">
         {!!dashBoards ? <GraficosDeTorta data={dashBoards} /> : "cargando"}
       </div>
@@ -26,7 +27,9 @@ function GraficosDeTorta({ data }) {
 
   return (
     <Fragment>
-
+      
+      
+      
       <div className="d-flex justify-content-around flex-wrap">
       <GraficoDeTorta
         titulo = "Genero"
