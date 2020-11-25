@@ -53,10 +53,10 @@ export default function CrearColaborador({}){
 return(
     <Fragment>
         <NavBar/>
-        <Container className="p-3" id="contenedor" >
+        <Container className="container-sm p-3" id="contenedorFormularioColaborador" >
             <h2>Crear Colaborador</h2>
             <Form autoComplete="off" noValidate validated={validated} onSubmit={handleSubmit}>
-                <Form.Row >
+
                 <InputForm
                                     label="Nombre"
                                     name="nombre"
@@ -65,8 +65,7 @@ return(
                                     type="text"
                                     required
                     />
-                </Form.Row>
-                <Form.Row >
+
                     <InputForm
                                     label="Nombre de Usuario"
                                     name="nombreUsuario"
@@ -75,8 +74,7 @@ return(
                                     type="text"
                                     required
                     />
-                </Form.Row>
-                <Form.Row >
+
                     <InputForm
                                     label="Email"
                                     name="email"
@@ -85,8 +83,7 @@ return(
                                     type="email"
                                     required
                     />
-                </Form.Row>
-                <Form.Row >
+
                     <InputForm
                                     label="Contraseña"
                                     name="password"
@@ -95,8 +92,7 @@ return(
                                     type="password"
                                     required
                     />
-                </Form.Row> 
-                <Form.Row >
+
                     <InputForm
                                     label="Repetir Contraseña"
                                     name="passwordRepetido"
@@ -105,7 +101,7 @@ return(
                                     type="password"
                                     required
                     />
-                </Form.Row>
+
                 <Button type="submit"  >
                     Crear Colaborador
                 </Button>        
@@ -117,7 +113,7 @@ return(
 
 function InputForm({label, mensajeControlInvalid = "este parametro es obligatorio.", ...props}){
     return(
-        <Form.Group>
+        <Form.Group >
             <Form.Label>{label}</Form.Label>
             <InputGroup >
                 <Form.Control
