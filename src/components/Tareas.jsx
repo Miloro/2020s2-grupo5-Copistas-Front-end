@@ -1,8 +1,7 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import UsuarioContext from './UsuarioContext';
-import {Table,Container, Button, Modal} from 'react-bootstrap'
+import {Table,Container, Button} from 'react-bootstrap'
 import {marcarTareaComoTerminada} from './Api'
-import { useHistory } from "react-router-dom";
 
 
 import NavBar from "./NavBar";
@@ -15,24 +14,12 @@ export default function Tareas () {
                 return(
                     <Fragment>
                         <NavBar />
-
+                        
                         <Container className="p-3" id="contenedor">
-                            <Table striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Libro</th>
-                                        <th>Tarea</th>
-                                        <th>Fecha Asignada</th>
-                                        <th>Terminada</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {!!context.usuario.rol?
-                                        <RenderizarTareas tareas={context.usuario.tareasPendientes}/>:
-                                    null}
-                                </tbody>
-                            </Table>
+                            {!!context.usuario.rol && context.usuario.tareasPendientes.lenght > 0?
+                                <CargarTabla context={context}/> :
+                                <h1>{"No hay tareas pendientes"}</h1>}
+                            
                         </Container>
                     </Fragment>
                     
@@ -45,8 +32,6 @@ export default function Tareas () {
 }
 
 function RenderizarTareas({tareas}){
-
-    let history = useHistory();
 
     function terminarTarea(id){
         marcarTareaComoTerminada(id).then((res)=>{
@@ -69,4 +54,24 @@ function RenderizarTareas({tareas}){
             </tr>)
         })
     )
+}
+
+function CargarTabla({context}){
+    return(
+<Table striped bordered hover size="sm">
+    <thead>
+        <tr>
+            <th>Libro</th>
+            <th>Tarea</th>
+            <th>Fecha Asignada</th>
+            <th>Terminada</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {!!context.usuario.rol?
+            <RenderizarTareas tareas={context.usuario.tareasPendientes}/>:
+        null}
+    </tbody>
+</Table>)
 }

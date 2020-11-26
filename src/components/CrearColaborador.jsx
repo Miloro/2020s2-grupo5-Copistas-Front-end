@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import {crearColaborador} from "./Api"
 
-export default function CrearColaborador({}){
+export default function CrearColaborador(){
 
     let history = useHistory();
 
