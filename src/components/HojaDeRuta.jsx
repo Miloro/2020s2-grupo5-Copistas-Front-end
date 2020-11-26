@@ -25,7 +25,6 @@ export default function HojaDeRuta() {
         estado: '',
         cuerpo: "",
         boton:''
-
     });
 
 
