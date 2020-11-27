@@ -42,16 +42,17 @@ export default function HojaDeRutaModal({hoja}) {
             <UsuarioContext.Consumer>{
                 context =>  {
                     return(
-                    <div id="hojaderuta" className={"container"}>
+                    <div id="hojaderuta" className={"container p-3"}>
                         <Row>
                             <h1 className={"m-3"}>
                                 {"Hoja de ruta de " + hojaDeRuta.libro.titulo}
                             </h1>
                         </Row>
                         {mostrarIteraciones()}
-                        {!!context.usuario.rol && context.usuario.esAdministrador()?
+                        {console.log(hoja.libro.retirado)}
+                        {!!context.usuario.rol && context.usuario.esAdministrador()&& !hoja.libro.retirado ?
                             <NuevaIteracion idHojaDeRuta={hojaDeRuta.id}/>:
-                            null
+                            <h2>Este libro ya fue retirado</h2>
                         }
                         
                     </div>
@@ -67,3 +68,5 @@ export default function HojaDeRutaModal({hoja}) {
         !!hojaDeRuta ? <div>{mostrarData()}</div> : "buscando..."
     );
 }
+
+
