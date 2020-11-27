@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from "react";
-import { Button, FormGroup, FormControl, Form } from "react-bootstrap";
+import { Alert,Button, FormGroup, FormControl, Form } from "react-bootstrap";
 import {login} from "./Api";
 import "../css/Login.css";
 import UsuarioContext from "./UsuarioContext"
@@ -12,6 +12,12 @@ export default function Login() {
 
     const [nombreUsuario, setNombreUsuario] = useState("");
     const [password, setPassword] = useState("");
+    const [estadoAlert, setEstadoAlert] = useState({
+        show: false,
+        estado: '',
+        cuerpo: "",
+        boton:''
+    });
 
   
     function validateForm() {
@@ -23,7 +29,12 @@ export default function Login() {
         login(nombreUsuario, password).then((user) => {
             context.iniciarSesion(user)
             history.push("/home")
-        }).catch(e => alert("usuario incorrecto"));
+        }).catch(e => setEstadoAlert({
+            show: true,
+            estado: 'danger',
+            cuerpo: "usuario Incorrecto",
+            boton: "outline-danger"
+        }))
 
     }
 
@@ -33,10 +44,23 @@ export default function Login() {
               return <Fragment> 
         <div class="container">
             <div class="row h-100 justify-content-center">
+                
                 <div className="Login">
+                    
                 <form onSubmit={event => {handleSubmit(event, context)}} >
                     <h2 id= "titulo" className= "font-weight-bold text-center mb-4">BIENVENIDO</h2>
                     <img src={logo} width="200" height="200" className="rounded-circle mx-auto d-block shadow mb-2 bg-white" alt=""/>
+                    <Alert show={estadoAlert.show} variant={estadoAlert.estado}>
+                        <p>
+                            {estadoAlert.cuerpo}
+                        </p>
+                        <hr/>
+                        <div className="d-flex justify-content-end">
+                            <Button  onClick={() => setEstadoAlert({...estadoAlert, show: false})} variant={estadoAlert.boton}>
+                                Cerrar
+                            </Button>
+                        </div>
+                    </Alert>
                     <FormGroup controlId="nombreUsuario" bsSize="large">
                     <Form.Label>Usuario</Form.Label>
                     <FormControl
