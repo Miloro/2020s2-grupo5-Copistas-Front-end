@@ -11,7 +11,7 @@ describe('Form', () => {
   })
   
   
-  it('completes email and pass and goes to home page', () => {
+  it('completes user and pass and goes to home page', () => {
     cy.get('body').within(() => {
       cy.get('input:first').type('admin')
       cy.get('input:last').type('admin')     
