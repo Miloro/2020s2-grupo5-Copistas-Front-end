@@ -16,9 +16,10 @@ export default function Tareas () {
                         <NavBar />
                         
                         <Container className="p-3" id="contenedor">
-                            {!!context.usuario.rol && context.usuario.tareasPendientes.lenght > 0?
-                                <CargarTabla context={context}/> :
-                                <h1>{"No hay tareas pendientes"}</h1>}
+                            
+                            {!!context.usuario.rol ?
+                                <CargarTabla context={context}/>:
+                                <h1>"cargando..."</h1>}
                             
                         </Container>
                     </Fragment>
