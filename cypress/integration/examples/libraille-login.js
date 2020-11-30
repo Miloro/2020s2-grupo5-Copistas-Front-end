@@ -12,6 +12,7 @@ describe('Form', () => {
   
   
   it('completes user and pass and goes to home page', () => {
+    cy.focused().should('have.class', 'form-control')
     cy.get('body').within(() => {
       cy.get('input:first').type('admin')
       cy.get('input:last').type('admin')     
@@ -19,8 +20,6 @@ describe('Form', () => {
     cy.get('Button').click()
     cy.url().should('eq', 'http://localhost:3000/home')
   })
- 
-   
 
 
 })

@@ -34,7 +34,18 @@ it('test login', () => {
       .should((response) => {
         expect(response.status).to.eq(200)
         //expect(response.body).to.have.length(10)
+    })
+    
+    cy.get('body').within(() => {
+        cy.get('input[name="nombre"]').type('Jorge')
+        cy.get('input[name="nombreUsuario"]').type('jorge')
+        cy.get('input[name="email"]').type('jorge@mail')
+        cy.get('input[name="password"]').type('lala')
+        cy.get('input[name="passwordRepetido"]').type('lala')     
+        cy.get('Button').contains('Crear Colaborador').click()       
       })
   })
+
+ 
 
 
