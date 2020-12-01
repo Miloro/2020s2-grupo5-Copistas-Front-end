@@ -37,14 +37,19 @@ it('test login', () => {
     })
     
     cy.get('body').within(() => {
-        cy.get('input[name="nombre"]').type('Jorge')
-        cy.get('input[name="nombreUsuario"]').type('jorge')
-        cy.get('input[name="email"]').type('jorge@mail')
+        cy.get('input[name="nombre"]').type('joe2321')
+        cy.get('input[name="nombreUsuario"]').type('joe1341')
+        cy.get('input[name="email"]').type('joe2ee3212@mail')
         cy.get('input[name="password"]').type('lala')
         cy.get('input[name="passwordRepetido"]').type('lala')     
-        cy.get('Button').contains('Crear Colaborador').click()       
+        cy.get('Button').contains('Crear Colaborador').click() 
+        cy.url().should('eq', 'http://localhost:3000/home') 
+        cy.get('input:first').type('El señor de los anillos la comunidad del anillo')    
+         
+          cy.get('Button').contains('Buscar').click()
+
       })
-  })
+})
 
  
 
