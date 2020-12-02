@@ -20,7 +20,7 @@ it('it focuses the input', () => {
 })
 
 
-it('test login', () => {
+it('test crear colaborador y buscar libro', () => {
     cy.get('body').within(() => {
       cy.get('input:first').type('admin')
       cy.get('input:last').type('admin')     
@@ -37,19 +37,30 @@ it('test login', () => {
     })
     
     cy.get('body').within(() => {
-        cy.get('input[name="nombre"]').type('joe2321')
-        cy.get('input[name="nombreUsuario"]').type('joe1341')
-        cy.get('input[name="email"]').type('joe2ee3212@mail')
+        cy.get('input[name="nombre"]').type('juan')
+        cy.get('input[name="nombreUsuario"]').type('juan')
+        cy.get('input[name="email"]').type('juan@mail')
         cy.get('input[name="password"]').type('lala')
         cy.get('input[name="passwordRepetido"]').type('lala')     
         cy.get('Button').contains('Crear Colaborador').click() 
         cy.url().should('eq', 'http://localhost:3000/home') 
         cy.get('input:first').type('El señor de los anillos la comunidad del anillo')    
-         
-          cy.get('Button').contains('Buscar').click()
+        cy.get('Button').contains('Buscar').click()
+        cy.get('input[name="personaEncargada"]').type('juan')
+        cy.get('input[name="fechaDeNacimiento"]').type('2020-02-11')
+        cy.get('select').select('ENVIO_DE_MAIL')
+        cy.get('Button').contains('Crear tarea').click()
 
-      })
+    })
 })
+
+
+
+
+
+
+
+
 
  
 
