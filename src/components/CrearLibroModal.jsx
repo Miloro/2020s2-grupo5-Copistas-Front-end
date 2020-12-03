@@ -34,7 +34,7 @@ export default function CrearLibroModal({show, cerrarLibroModal, actualizarLibro
     }
 
     return (
-        <Modal show={show} onHide={cerrarLibroModal}>
+        <Modal show={show} onHide={cerrarLibroModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Crear Libro</Modal.Title>
             </Modal.Header>

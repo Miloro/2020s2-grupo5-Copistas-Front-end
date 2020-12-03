@@ -52,3 +52,11 @@ body {
   font-family: Roboto;
   color: #afbdd1;
 }
+
+#contenedorFormularioColaborador {
+  background: #ffffff;
+  font-family: Roboto;
+  color: #0f191f;
+  border-radius: 1rem;
+  max-width: 25%;
+}

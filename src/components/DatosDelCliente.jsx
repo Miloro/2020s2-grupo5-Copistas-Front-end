@@ -65,6 +65,7 @@ export default function DatosDelCliente({ titulo, setClienteId }) {
         cerrarModal={cerrarModalCliente}
         actualizarCliente={setCliente}
         setClienteId={setClienteId}
+        titulo = {titulo}
       />
 
       <fieldset id="contenedorAzul">

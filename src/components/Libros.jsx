@@ -1,4 +1,3 @@
-import { set } from "js-cookie";
 import React, { Fragment, useState, useEffect } from "react";
 import {Table,Container, Button, Modal} from 'react-bootstrap'
 import {getAllLibros, editarLibro} from './Api'

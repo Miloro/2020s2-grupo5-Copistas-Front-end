@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {crearCliente} from "./Api";
-import {Button, Form, InputGroup, Col, Modal} from "react-bootstrap";
+import {Alert, Button, Form, InputGroup, Col, Modal} from "react-bootstrap";
 
 export default function CrearClienteModal({
                                               abierto,
                                               cerrarModal,
                                               actualizarCliente,
                                               setClienteId,
+                                              titulo,
                                           }) {
     const [cliente, setCliente] = useState({
         id: "",
@@ -24,6 +25,13 @@ export default function CrearClienteModal({
         fechaDeNacimiento: "",
         sexo: "HOMBRE",
         nivelDiscapacidadVisual: "TOTAL",
+    });
+
+    const [estadoAlert, setEstadoAlert] = useState({
+        show: false,
+        estado: '',
+        cuerpo: "",
+        boton:''
     });
 
     const [validated, setValidated] = useState(false);
@@ -46,32 +54,53 @@ export default function CrearClienteModal({
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
+        if (cliente.telefonoFijo.length > 0 || cliente.telefonoMovil.length > 0 || cliente.correoElectronico.length > 0) {
+            event.preventDefault()
+            const form = event.currentTarget;
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }else{
+                crearCliente(cliente).then((clienteCreado) => {
+                actualizarCliente(clienteCreado);
+                setClienteId(clienteCreado.id);
+                });
+                cerrarModal();}
+            setValidated(true);
         }else{
-            crearCliente(cliente).then((clienteCreado) => {
-            actualizarCliente(clienteCreado);
-            setClienteId(clienteCreado.id);
-            });
-            cerrarModal();}
-        setValidated(true);
-
+            event.preventDefault();
+            event.stopPropagation();
+            setEstadoAlert({
+                show: true,
+                estado: 'danger',
+                cuerpo: "Algun parametro de contacto tiene que estar completo",
+                boton: "outline-danger"
+              })
+        }
       };
 
     return (
         <Modal show={abierto} onHide={cerrarModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
-                <Modal.Title>Crear Cliente</Modal.Title>
+                <Modal.Title>Crear {titulo}</Modal.Title>
             </Modal.Header>
         <Modal.Body>
+            <Alert show={estadoAlert.show} variant={estadoAlert.estado}>
+                        <p>
+                            {estadoAlert.cuerpo}
+                        </p>
+                        <hr/>
+                        <div className="d-flex justify-content-end">
+                            <Button  onClick={() => setEstadoAlert({...estadoAlert, show: false})} variant={estadoAlert.boton}>
+                                Cerrar
+                            </Button>
+                        </div>
+            </Alert>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Row xs={1} md={4}>
                         <Col>
                             <InputForm
-                                label="Nombre"
+                                label="Nombre*"
                                 name="nombre"
                                 value={cliente.nombre}
                                 onChange={handleInputChange}
@@ -80,7 +109,7 @@ export default function CrearClienteModal({
                         </Col>
                         <Col >
                             <InputForm
-                                label="Apellido"
+                                label="Apellido*"
                                 name="apellido"
                                 value={cliente.apellido}
                                 onChange={handleInputChange}
@@ -89,8 +118,7 @@ export default function CrearClienteModal({
                         </Col>
                         <Col >
                             <InputForm
-                                type="number"
-                                label="DNI"
+                                label="DNI*"
                                 name="dni"
                                 value={cliente.dni}
                                 onChange={handleInputNumberChange}
@@ -174,8 +202,10 @@ export default function CrearClienteModal({
                             <InputForm
                                 label="Correo electrónico"
                                 name="correoElectronico"
+                                type="email"
                                 value={cliente.correoElectronico}
                                 onChange={handleInputChange}
+                                mensajeControlInvalid = "esta cuenta de correo es invalida."
                             />
                         </Col>
                 </Form.Row>
@@ -186,14 +216,14 @@ export default function CrearClienteModal({
     );
 }
 
-function InputForm({label, mensajeControlInvalid = "este parametro es obligatorio.", ...props}){
+function InputForm({label, mensajeControlInvalid = "este parametro es obligatorio.", type = "text",...props}){
     return(
         <Form.Group>
             <Form.Label>{label}</Form.Label>
             <InputGroup>
                 <Form.Control
                 {...props}
-                type="text"
+                type={type}
                 placeholder={label}
                 aria-describedby="inputGroupPrepend"
                 />
